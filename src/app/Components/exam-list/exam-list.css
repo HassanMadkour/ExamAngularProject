@@ -1,0 +1,197 @@
+.exam-card {
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease-out;
+  height: 100%;
+}
+
+.exam-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-bottom: none;
+}
+
+.exam-duration {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+.btn-start-exam {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-start-exam:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+}
+
+.btn-delete {
+  transition: all 0.3s;
+}
+
+.btn-delete:hover {
+  transform: rotate(5deg);
+}
+
+.time-badge {
+  animation: bounce 2s infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.progress {
+  height: 8px;
+  border-radius: 4px;
+  animation: progressGrow 1s ease-out;
+}
+
+@keyframes progressGrow {
+  from {
+    width: 0%;
+  }
+}
+
+/* Staggered animation delay for cards */
+.card-animation-delay-1 {
+  animation-delay: 0.1s;
+}
+.card-animation-delay-2 {
+  animation-delay: 0.2s;
+}
+.card-animation-delay-3 {
+  animation-delay: 0.3s;
+}
+
+
+
+ .btn-add-exam {
+            background: linear-gradient(135deg, #5cb85c 0%, #2ecc71 100%);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-add-exam:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+        
+         .search-box .form-control {
+            padding-left: 40px;
+            border-radius: 30px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .search-box .bi-search {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        .action-bar {
+            margin-bottom: 30px;
+        }
+
+
+
+
+
+              .no-exams-container {
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 12px;
+            background-color: #f8f9fa;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease-out;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .no-exams-icon {
+            font-size: 4rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        .no-exams-title {
+            font-size: 1.8rem;
+            color: #343a40;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .no-exams-message {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .no-exams-action {
+            margin-top: 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Hide initially */
+        /* #noExamsMessage {
+            display: none;
+        } */

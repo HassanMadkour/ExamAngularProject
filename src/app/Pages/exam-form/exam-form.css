@@ -1,0 +1,134 @@
+.exam-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 30px;
+        }
+        
+        .question-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .question-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-number {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: #0d6efd;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .btn-add-question {
+            background: linear-gradient(135deg, #5cb85c 0%, #2ecc71 100%);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-add-question:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+        
+        .btn-remove-question {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-remove-question:hover {
+            background-color: #bb2d3b;
+        }
+        
+        .btn-submit-exam {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .btn-submit-exam:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+        
+        .time-input-group {
+            position: relative;
+        }
+        
+        .time-input-group .form-control {
+            padding-left: 40px;
+        }
+        
+        .time-input-group .bi-clock {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .duration-badge {
+            background-color: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+        
+        .choice-radio {
+            margin-right: 10px;
+        }
+        
+        .choice-label {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        
+        .choice-label:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+        }

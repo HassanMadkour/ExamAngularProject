@@ -1,0 +1,123 @@
+<div class="container py-5">
+    <div class="exam-form-container">
+        <div class="form-header">
+            <h2><i class="bi bi-journal-plus me-2"></i>{{examId == null ? "Create New Exam":"Edit Exam"}}</h2>
+        </div>
+
+        <form id="examForm" [formGroup]="examForm" (submit)="saveExam()">
+
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3">
+                    <label for="examTitle" class="form-label">Exam Title</label>
+                    <input type="text" class="form-control" id="examTitle" formControlName="title">
+                    @if(getTitle.touched){
+                    @if(getTitle.hasError('required')){
+                    <div class="form-text text-danger">
+                        Exam Tilel is Required
+                    </div>
+                    } @if(getTitle.hasError('minlength')){
+                    <div class="form-text text-danger">
+                        Exam Title length must be > 2
+                    </div>
+                    } }
+                </div>
+
+                <div class="col-md-6 mb-3" formGroupName="duration">
+                    <label class="form-label">Duration</label>
+                    <div class="d-flex align-items-center">
+                        <input type="number" class="form-control me-2" id="durationHours" min="0" placeholder="HH"
+                            style="width: 70px;" formControlName="hours">
+                        <span class="me-2">:</span>
+                        <input type="number" class="form-control me-2" id="durationMinutes" min="0" max="59"
+                            placeholder="MM" style="width: 70px;" formControlName="minutes">
+                        <span class="duration-badge" id="durationDisplay">00:00:00</span>    
+                    
+                    </div>
+                    @if(getDuration.touched){
+                        @if(getHours.hasError('required')){
+                    <div class="form-text text-danger">
+                       Hours is Required
+                    </div>
+                    }
+                         @if(getHours.hasError('max')){
+                        <div  class="form-text text-danger">
+                            Hours must be < 4
+                        </div>
+                        }
+                         @if(getMinutes.hasError('max')){
+                        <div  class="form-text text-danger">
+                            minutes must be < 59
+                        </div>
+                        } @if(getMinutes.hasError('min')){
+                        <div  class="form-text text-danger">
+                            minutes must be > 0
+                        </div>
+                        } @if(getMinutes.hasError('required')){
+                    <div class="form-text text-danger">
+                        Minutes is Required
+                    </div>
+                    }
+                     }
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+                    <label for="minDegree" class="form-label">Minimum Degree</label>
+                    <input type="number" class="form-control" id="minDegree" formControlName="mindegree">
+                     @if(getMinDegree.touched){
+                    @if(getMinDegree.hasError('required')){
+                    <div class="form-text text-danger">
+                        MinDegree is Required
+                    </div>
+                    }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="maxDegree" class="form-label">Maximum Degree</label>
+                    <input type="number" class="form-control" id="maxDegree" formControlName="maxdegree">
+                     @if(getMaxDegree.touched){
+                    @if(getMaxDegree.hasError('required')){
+                    <div class="form-text text-danger">
+                        MaxDegree is Required
+                    </div>
+                    }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="startTime" class="form-label">Start Time</label>
+                    <div class="time-input-group">
+                        <i class="bi bi-clock"></i>
+                        <input type="datetime-local" class="form-control" id="startTime" formControlName="starttime">
+                    </div>
+                     @if(getStartTime.touched){
+                    @if(getStartTime.hasError('required')){
+                    <div class="form-text text-danger">
+                        StartTime is Required
+                    </div>
+                    }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="endTime" class="form-label">End Time</label>
+                    <div class="time-input-group">
+                        <i class="bi bi-clock"></i>
+                        <input type="datetime-local" class="form-control" id="endTime" formControlName="endtime" readonly>
+                    </div>
+                    @if(getEndTime.touched){
+                    @if(getTitle.hasError('required')){
+                    <div class="form-text text-danger">
+                        EndTime is Required
+                    </div>
+                    }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-submit-exam text-white">
+                    <i class="bi bi-save me-1"></i> {{examId == null ? "Create New Exam":"Edit Exam"}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
