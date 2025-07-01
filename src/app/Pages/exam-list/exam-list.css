@@ -101,7 +101,7 @@
   }
 }
 
-/* Staggered animation delay for cards */
+
 .card-animation-delay-1 {
   animation-delay: 0.1s;
 }
@@ -149,49 +149,4 @@
 
 
 
-              .no-exams-container {
-            text-align: center;
-            padding: 60px 20px;
-            border-radius: 12px;
-            background-color: #f8f9fa;
-            margin-top: 30px;
-            animation: fadeIn 0.5s ease-out;
-            border: 2px dashed #dee2e6;
-        }
-        
-        .no-exams-icon {
-            font-size: 4rem;
-            color: #6c757d;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-        
-        .no-exams-title {
-            font-size: 1.8rem;
-            color: #343a40;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .no-exams-message {
-            font-size: 1.1rem;
-            color: #6c757d;
-            margin-bottom: 25px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .no-exams-action {
-            margin-top: 20px;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Hide initially */
-        /* #noExamsMessage {
-            display: none;
-        } */
+     
