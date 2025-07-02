@@ -8,6 +8,7 @@ import { IGetAllExam } from '../../Models/iget-all-exam';
   providedIn: 'root'
 })
 export class ExamService {
+  
 apiUrl: string = 'https://localhost:44326/api/Exam';
   constructor(private http:HttpClient) { }
 
@@ -35,5 +36,8 @@ search(examname:string):Observable<IGetAllExam []>{
 
   delete(id: number):Observable<any> {
     return this.http.delete(`${this.apiUrl}?id=${id}`);
+  }
+  GetStudentReports(examId:number , page:number = 1 , size :number = 10) : Observable<IExamReports> {
+    return this.http.get(`https://localhost:7085/api/Admin/Exams/${examId}/Students`)  as  Observable<IExamReports>;
   }
 }
