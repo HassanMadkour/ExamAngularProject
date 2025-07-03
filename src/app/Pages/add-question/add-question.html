@@ -1,0 +1,132 @@
+<div class="add-question-container">
+  <div class="form-header">
+    <button class="back-btn">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="m19 12H5"></path>
+      </svg>
+      Back to Questions
+    </button>
+    <h1>Add New MCQ Question</h1>
+    <p class="subtitle">Create a new multiple choice question for your exam</p>
+  </div>
+
+  <form class="question-form">
+    <div class="form-section">
+      <h2>Question Details</h2>
+
+      <div class="form-group">
+        <label for="title">Question Title *</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          maxlength="200"
+          placeholder="Enter the question title"
+          class="form-input"
+        />
+      </div>
+
+      <!-- <div class="form-row">
+        <div class="form-group">
+          <label for="difficulty">Difficulty Level *</label>
+          <select
+            id="difficulty"
+            name="difficulty"
+            required
+            class="form-select"
+          >
+            <option value="">Select difficulty</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+          <div class="error-message">difficultyError</div>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category *</label>
+          <input
+            type="text"
+            id="category"
+            name="category"
+            required
+            maxlength="50"
+            placeholder="e.g., Angular Basics, RxJS, etc."
+            class="form-input"
+          />
+          <div class="error-message">Error</div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="form-section">
+      <h2>Answer Options</h2>
+      <p class="section-description">
+        Provide 4 answer options and select the correct one
+      </p>
+
+      <div class="options-container">
+        @for (item of [1,2,3,4]; track $index) {
+        <div class="option-group">
+          <div class="option-header">
+            <label class="option-label">Option A</label>
+            <label class="radio-label">
+              <input
+                type="radio"
+                name="correctAnswer"
+                required
+                class="radio-input"
+              />
+              <span class="radio-custom"></span>
+              Correct Answer
+            </label>
+          </div>
+
+          <input
+            type="text"
+            required
+            maxlength="200"
+            placeholder="'Enter option '"
+            class="option-input"
+          />
+
+          <div class="option-char-count">200</div>
+          <div class="error-message">Option A is required</div>
+        </div>
+        }
+      </div>
+
+      <div class="error-message global-error">correct</div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="cancel-btn">Cancel</button>
+      <button type="submit" class="submit-btn">
+        <svg class="spinner" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            opacity="0.25"
+          ></circle>
+          <path
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            opacity="0.75"
+          ></path>
+        </svg>
+        Creating...
+      </button>
+    </div>
+  </form>
+</div>

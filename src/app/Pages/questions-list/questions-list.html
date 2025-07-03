@@ -1,1 +1,11 @@
-<p>questions-list works!</p>
+<div class="questions-list">
+  <app-search-bar></app-search-bar>
+  @for (item of displayedQuestions; track $index) {
+  <app-question-card [questionModel]="item" [index]="$index">
+  </app-question-card>
+  }@empty {
+  <app-empty-card
+    [emptyModel]="{title : 'No Questions Yet' , description : 'Start by adding your first MCQ exam question'}"
+  ></app-empty-card>
+  }
+</div>

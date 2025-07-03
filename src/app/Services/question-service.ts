@@ -11,7 +11,7 @@ export class QuestionService {
   constructor(private httpClient:HttpClient) { }
 
    getAllQuestion(examId : number  , page :number = 1 , size : number = 10) : Observable<IQuestionModel []>{
-    return this.httpClient.get(`${this.baseUrl}/Admin/Exam/${examId}/Questions?page=${page}&size=${size}`) as Observable<IQuestionModel[]>;
+    return this.httpClient.get(`${this.baseUrl}Admin/Exam/${examId}/Questions?page=${page}&size=${size}`) as Observable<IQuestionModel[]>;
   }
   updateQuestion(questionId :number , questionModel:IQuestionModel): Observable<IQuestionModel>{
     return this.httpClient.put(`${this.baseUrl}/Admin/Question/${questionId}` , questionModel) as Observable<IQuestionModel> ;

@@ -1,118 +1,142 @@
 <div class="container py-5">
-    <div class="action-bar">
-        <div class="row align-items-center">
-            <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-add-exam text-white" [routerLink]="['/examform']">
-                    <i class="bi bi-plus-circle-fill me-1"></i> Add New Exam
-                </button>
+  <div class="action-bar">
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <button
+          class="btn btn-add-exam text-white"
+          [routerLink]="['/examform']"
+        >
+          <i class="bi bi-plus-circle-fill me-1"></i> Add New Exam
+        </button>
+      </div>
+      <div class="col-md-6">
+        <div class="search-box">
+          <i class="bi bi-search"></i>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search exams..."
+            (input)="Search()"
+            [(ngModel)]="searchKeyword"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  @if (exams.length === 0 ||null) {
+  <div id="noExamsMessage" class="no-exams-container">
+    <div class="no-exams-icon">
+      <i class="bi bi-journal-x"></i>
+    </div>
+    <h3 class="no-exams-title">No Exams Found</h3>
+    <p class="no-exams-message" id="dynamicMessage">
+      There are currently no exams available that match your search criteria.
+    </p>
+  </div>
+  }
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @for (exam of exams; track exam.id) {
+    <div class="col">
+      <div class="exam-card card card-animation-delay-1">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">{{exam.name}}</h5>
+            <span class="exam-duration">{{exam.duration}}</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <small>Exam Progress</small>
+              <small>{{exam.QuestionOfNumber}}</small>
+            </div>
+            <div class="progress">
+              <div
+                class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+                role="progressbar"
+                style="width: 25%"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-arrow-up-circle-fill text-success me-2"></i>
+                <div>
+                  <small class="text-muted">Max Degree</small>
+                  <h6 class="mb-0">{{exam.maxDegree}}</h6>
+                </div>
+              </div>
             </div>
             <div class="col-md-6">
-                <div class="search-box">
-                    <i class="bi bi-search"></i>
-                    <input type="text" class="form-control" placeholder="Search exams..." (input)="Search()"
-                        [(ngModel)]="searchKeyword">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-arrow-down-circle-fill text-warning me-2"></i>
+                <div>
+                  <small class="text-muted">Min Degree</small>
+                  <h6 class="mb-0">{{exam.minDegree}}</h6>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-    @if (exams.length === 0 ||null) { <div id="noExamsMessage" class="no-exams-container">
-        <div class="no-exams-icon">
-            <i class="bi bi-journal-x"></i>
-        </div>
-        <h3 class="no-exams-title">No Exams Found</h3>
-        <p class="no-exams-message" id="dynamicMessage">There are currently no exams available that match your
-            search criteria.</p>
-    </div>}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @for (exam of exams; track exam.id) {
-        <div class="col">
-            <div class="exam-card card card-animation-delay-1">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title mb-0">{{exam.name}}</h5>
-                        <span class="exam-duration">{{exam.duration}}</span>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <small>Exam Progress</small>
-                            <small>{{exam.QuestionOfNumber}}</small>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
-                                role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                    </div>
+          </div>
 
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-arrow-up-circle-fill text-success me-2"></i>
-                                <div>
-                                    <small class="text-muted">Max Degree</small>
-                                    <h6 class="mb-0">{{exam.maxDegree}}</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-arrow-down-circle-fill text-warning me-2"></i>
-                                <div>
-                                    <small class="text-muted">Min Degree</small>
-                                    <h6 class="mb-0">{{exam.minDegree}}</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-clock-fill text-primary me-2 time-badge"></i>
-                                <div>
-                                    <small class="text-muted">Start Time</small>
-                                    <h6 class="mb-0">{{exam.startTime}}</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-clock-history text-danger me-2"></i>
-                                <div>
-                                    <small class="text-muted">End Time</small>
-                                    <h6 class="mb-0">{{exam.endTime}} </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-clock-fill text-primary me-2 time-badge"></i>
+                <div>
+                  <small class="text-muted">Start Time</small>
+                  <h6 class="mb-0">{{exam.startTime}}</h6>
                 </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <div class="d-flex justify-content-between">
-                       
-                        <!-- @if(exam.startTime == datatoday){ //role is  a student
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-clock-history text-danger me-2"></i>
+                <div>
+                  <small class="text-muted">End Time</small>
+                  <h6 class="mb-0">{{exam.endTime}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+          <div class="d-flex justify-content-between">
+            <!-- @if(exam.startTime == datatoday){ //role is  a student
                         <button class="btn btn-start-exam text-white">
                             <i class="bi bi-pencil-square me-1"></i>
                             Start Exam
                         </button>
                         }{} -->
-                        <button class="btn btn-outline-danger btn-delete" (click)="deleteExam(exam.id)">
-                            <i class="bi bi-trash-fill me-1"></i> Delete
-                        </button>
-                        <button class="btn btn-outline-primary btn-delete" [routerLink]="['/examform', exam.id]">
-                            <i class="bi bi-trash-fill me-1"></i> Edit
-                        </button>
+            <button
+              class="btn btn-outline-danger btn-delete"
+              (click)="deleteExam(exam.id)"
+            >
+              <i class="bi bi-trash-fill me-1"></i> Delete
+            </button>
+            <button
+              class="btn btn-outline-primary btn-delete"
+              [routerLink]="['/examform', exam.id]"
+            >
+              <i class="bi bi-trash-fill me-1"></i> Edit
+            </button>
 
-                        <button class="btn btn-start-exam text-white">
-                            <i class="bi bi-pencil-square me-1"></i>
-                            Question
-                        </button>
-
-                    </div>
-                </div>
-            </div>
+            <button
+              class="btn btn-start-exam text-white"
+              [routerLink]="['/exam' , exam.id , 'questions']"
+            >
+              <i class="bi bi-pencil-square me-1"></i>
+              Question
+            </button>
+          </div>
         </div>
-
-        }
+      </div>
     </div>
+
+    }
+  </div>
+</div>
