@@ -2,9 +2,7 @@
   <div class="question-card-content">
     <div class="card-content">
       <div class="question-info">
-        <p class="question-title">
-          {{index + 1}}. {{questionModel.questionText}}
-        </p>
+        <p class="question-title">{{index }}. {{questionModel.questionText}}</p>
 
         <div class="options-container">
           @for (item of options; track $index) {
@@ -51,7 +49,11 @@
       </svg>
       Edit
     </button>
-    <button class="action-btn remove-btn" title="Remove Question">
+    <button
+      class="action-btn remove-btn"
+      title="Remove Question"
+      (click)="confirmDelete()"
+    >
       <svg
         viewBox="0 0 24 24"
         fill="none"

@@ -1,8 +1,10 @@
+@if (isExamLoaded && isQuestionsLoaded) {
 <div class="exam-questions-container">
   <div class="header">
-    <h1>MCQ Exam Questions</h1>
+    <h1>{{ examInfoModel.name | uppercase}}-Exam</h1>
     <p class="subtitle">
-      Manage your multiple choice exam questions collection
+      {{ examInfoModel.startTime | date : 'dd, MMM | HH:mm a' }} - {{
+      examInfoModel.endTime | date : 'dd, MMM | HH:mm a' }}
     </p>
     <button class="add-question-btn" [routerLink]="['create']">
       <svg
@@ -20,23 +22,38 @@
   </div>
   <div class="questions-stats">
     <div class="stat-card">
-      <div class="stat-number">30</div>
+      <div class="stat-number">{{examInfoModel.numberOfQuestions }}</div>
       <div class="stat-label">Total Questions</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">20</div>
-      <div class="stat-label">Easy</div>
+      <div class="stat-number">{{examInfoModel.totalScore }}</div>
+      <div class="stat-label">Total Points</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">10</div>
-      <div class="stat-label">Medium</div>
+      <div class="stat-number">{{examInfoModel.maxDegree }}</div>
+      <div class="stat-label">Max Degree</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">50</div>
-      <div class="stat-label">Hard</div>
+      <div class="stat-number">
+        {{examInfoModel.maxDegree - examInfoModel.totalScore }}
+      </div>
+      <div class="stat-label">Remaining Points</div>
     </div>
   </div>
   <app-questions-list
+    (deleteQuestion)="removeQuestionFromList($event)"
+    [page]="selectedPage"
     [displayedQuestions]="currentQuestions"
   ></app-questions-list>
+  @if(!(currentQuestions.length <= 0 && selectedPage ===1)){
+  <app-pagination-bar
+    [selectedPage]="selectedPage"
+    [pages]="pages"
+    (pageChange)="changePage($event)"
+  ></app-pagination-bar>
+
+  }
 </div>
+}@else {
+<app-loading-spinner></app-loading-spinner>
+}

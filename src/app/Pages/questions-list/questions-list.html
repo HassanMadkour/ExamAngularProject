@@ -1,7 +1,11 @@
 <div class="questions-list">
   <app-search-bar></app-search-bar>
   @for (item of displayedQuestions; track $index) {
-  <app-question-card [questionModel]="item" [index]="$index">
+  <app-question-card
+    (deleteQuestion)="removeQuestion($event)"
+    [questionModel]="item"
+    [index]="(page -1) * 10 + $index +1"
+  >
   </app-question-card>
   }@empty {
   <app-empty-card
