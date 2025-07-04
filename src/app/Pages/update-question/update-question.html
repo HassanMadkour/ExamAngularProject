@@ -1,24 +1,23 @@
 <div class="add-question-container">
   <div class="form-header">
     <!-- <button class="back-btn">
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path d="m12 19-7-7 7-7"></path>
-        <path d="m19 12H5"></path>
-      </svg>
-      Back to Questions
-    </button> -->
-    <h1>Add New MCQ Question</h1>
-    <p class="subtitle">Create a new multiple choice question for your exam</p>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="m12 19-7-7 7-7"></path>
+          <path d="m19 12H5"></path>
+        </svg>
+        Back to Questions
+      </button> -->
+    <h1>Update Question</h1>
   </div>
 
   <form
     class="question-form"
-    [formGroup]="createQuestionForm"
+    [formGroup]="UpdateQuestionForm"
     (submit)="onFormSubmit()"
   >
     <div class="form-section">
@@ -62,36 +61,36 @@
         </div>
       </div>
       <!-- <div class="form-row">
-        <div class="form-group">
-          <label for="difficulty">Difficulty Level *</label>
-          <select
-            id="difficulty"
-            name="difficulty"
-            required
-            class="form-select"
-          >
-            <option value="">Select difficulty</option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-          </select>
-          <div class="error-message">difficultyError</div>
-        </div>
-
-        <div class="form-group">
-          <label for="category">Category *</label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            required
-            maxlength="50"
-            placeholder="e.g., Angular Basics, RxJS, etc."
-            class="form-input"
-          />
-          <div class="error-message">Error</div>
-        </div>
-      </div> -->
+          <div class="form-group">
+            <label for="difficulty">Difficulty Level *</label>
+            <select
+              id="difficulty"
+              name="difficulty"
+              required
+              class="form-select"
+            >
+              <option value="">Select difficulty</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+            <div class="error-message">difficultyError</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="category">Category *</label>
+            <input
+              type="text"
+              id="category"
+              name="category"
+              required
+              maxlength="50"
+              placeholder="e.g., Angular Basics, RxJS, etc."
+              class="form-input"
+            />
+            <div class="error-message">Error</div>
+          </div>
+        </div> -->
     </div>
 
     <div class="form-section">
@@ -141,7 +140,7 @@
       <button type="button" class="cancel-btn" (click)="goBack()">
         Cancel
       </button>
-      <button type="submit" class="submit-btn">Create Question</button>
+      <button type="submit" class="submit-btn">Update</button>
     </div>
   </form>
 </div>

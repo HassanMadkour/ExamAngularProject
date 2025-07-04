@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { OptionCard } from "./option-card/option-card";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-question-card',
-  imports: [OptionCard],
+  imports: [OptionCard , RouterLink],
   templateUrl: './question-card.html',
   styleUrl: './question-card.css'
 })

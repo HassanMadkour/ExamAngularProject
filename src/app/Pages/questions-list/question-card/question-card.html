@@ -13,8 +13,8 @@
         </div>
 
         <div class="question-meta">
-          <span class="difficulty">Easy </span>
-          <span class="category"> Basic</span>
+          <span class="difficulty">Points : </span>
+          <span class="category"> {{questionModel.score}}</span>
           <span class="date"></span>
         </div>
       </div>
@@ -33,7 +33,11 @@
       </svg>
       Details
     </button>
-    <button class="action-btn edit-btn" title="Edit Question">
+    <button
+      class="action-btn edit-btn"
+      title="Edit Question"
+      [routerLink]="['update', questionModel.id]"
+    >
       <svg
         viewBox="0 0 24 24"
         fill="none"
