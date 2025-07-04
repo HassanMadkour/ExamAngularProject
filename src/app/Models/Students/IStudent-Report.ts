@@ -1,5 +1,5 @@
 interface IStudentReport {
-    FullName : string ;
-    isPassed : boolean ; 
-    Marks : number ;
+    fullName : string ;
+    isPassed : boolean | null ; 
+    marks : number ;
 }

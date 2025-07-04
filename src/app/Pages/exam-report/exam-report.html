@@ -1,0 +1,102 @@
+@if (isLoaded) {
+<div class="exam-report-container">
+  <div class="header-section">
+    <h1 class="exam-title">{{ exam.examName }} - Exam Report</h1>
+    <div class="exam-meta">
+      <div class="meta-card">
+        <span class="meta-label">Max Marks</span>
+        <span class="meta-value">{{ exam.maxMarks }}</span>
+      </div>
+      <div class="meta-card">
+        <span class="meta-label">Passing Marks</span>
+        <span class="meta-value">{{ exam.minMarks }}</span>
+      </div>
+      <div class="meta-card">
+        <span class="meta-label">Duration</span>
+        <span class="meta-value">{{ exam.duration }}</span>
+      </div>
+    </div>
+    <div class="date-info">
+      <div class="date-card">
+        <span class="date-label">Start Date</span>
+        <span class="date-value"
+          >{{ exam.startDateTime | date : 'medium' }}</span
+        >
+      </div>
+      <div class="date-card">
+        <span class="date-label">End Date</span>
+        <span class="date-value">{{ exam.endDateTime | date : 'medium' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="results-section">
+    <h2>Student Results</h2>
+    <div class="stats-summary">
+      <div class="stat-card">
+        <span class="stat-value">{{ exam.totalStudents }}</span>
+        <span class="stat-label">Total Students</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ exam.passedStudents }}</span>
+        <span class="stat-label">Passed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ exam.failedStudents }}</span>
+        <span class="stat-label">Failed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ exam.averageMarks }}</span>
+        <span class="stat-label">Average Marks</span>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Marks</th>
+            <th>Status</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (student of exam.students; track $index) {
+          <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ student.fullName }}</td>
+            <td>{{ student.marks }}</td>
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="{
+                        'passed': student.isPassed === true,
+                        'failed': student.isPassed === false,
+                        'unknown': student.isPassed === null
+                      }"
+              >
+                @if(student.isPassed === true) {
+                <span><i class="fas fa-check-circle"></i> Passed </span>
+                } @else if(student.isPassed === false) {
+                <i class="fas fa-times-circle"></i> Failed } @else {
+                <i class="fas fa-question-circle"></i> N/A }
+              </span>
+            </td>
+            <td>{{ calculatePercentage(student.marks) }}%</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer-section">
+    <p>Report generated on {{ currentDate | date:'medium' }}</p>
+  </div>
+</div>
+
+}@else {
+<app-loading-spinner></app-loading-spinner>
+}

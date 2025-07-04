@@ -1,9 +1,13 @@
 interface IExamReports  extends IBaseExam{
-    ExamName:string ;
-    MaxMarks:number;
-    MinMarks: number ;
-    Duration : string ;
-    startDateTime : string;
+    examName: string;
+    maxMarks: number;
+    minMarks: number;
+    totalStudents: number;
+    passedStudents: number;
+    failedStudents: number;
+    averageMarks: number;
+    duration: string; 
+    startDateTime: string; 
     endDateTime: string;
     students : IStudentReport[];
 }
