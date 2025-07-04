@@ -15,5 +15,7 @@ export const routes: Routes = [
         path : "exam/:id/questions/create",component: AddQuestion
     },{
         path : "exam/:id/questions/update/:questionId",component: UpdateQuestion
+    }, {
+      
     }
 ];

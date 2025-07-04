@@ -18,6 +18,9 @@ apiUrl: string = 'https://localhost:7085/api/Exam';
   gitById(id:number):Observable<IGetAllExam>{
     return this.http.get<IGetAllExam>(`${this.apiUrl}/Id?examId=${id}`);
   }
+  gEtExam(id:number):Observable<IExamInfo>{
+    return this.http.get<IExamInfo>(`${this.apiUrl}/Id?examId=${id}`);
+  }
 
   getExamWithQuestions(examId:number): Observable<any>{
   return this.http.get<any>(`${this.apiUrl}/ExamWithQuestions/${examId}`);

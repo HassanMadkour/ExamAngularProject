@@ -1,4 +1,4 @@
-interface IExamReports {
+interface IExamReports  extends IBaseExam{
     ExamName:string ;
     MaxMarks:number;
     MinMarks: number ;
