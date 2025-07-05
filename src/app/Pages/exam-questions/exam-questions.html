@@ -40,6 +40,8 @@
       <div class="stat-label">Remaining Points</div>
     </div>
   </div>
+  <app-search-bar (searchEvent)="searchAboutQuestion($event)"></app-search-bar>
+
   <app-questions-list
     (deleteQuestion)="removeQuestionFromList($event)"
     [page]="selectedPage"
