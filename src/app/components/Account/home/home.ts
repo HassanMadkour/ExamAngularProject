@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { IJWTClaims } from '../../models/ijwtclaims';
 import { AccountService } from '../../services/account-service';
+import { IJWTClaims } from '../../models/ijwtclaims';
 
 @Component({
   selector: 'app-home',

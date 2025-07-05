@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { EmailValidator, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account-service';
 import { IForgotPassword } from '../../models/iforgot-password';
 

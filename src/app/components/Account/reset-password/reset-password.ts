@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IResetPassword } from '../../models/ireset-password';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from '../../services/account-service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AccountService } from '../../services/account-service';
+import { IResetPassword } from '../../models/ireset-password';
 
 @Component({
   selector: 'app-reset-password',

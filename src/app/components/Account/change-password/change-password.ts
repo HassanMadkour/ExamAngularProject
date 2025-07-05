@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AccountService } from '../../services/account-service';
-import { IChangePassword } from '../../models/ichange-password';
+
 import { Router } from '@angular/router';
+import { IChangePassword } from '../../models/ichange-password';
+import { AccountService } from '../../services/account-service';
 
 @Component({
   selector: 'app-change-password',
