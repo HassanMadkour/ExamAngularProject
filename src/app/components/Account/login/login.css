@@ -1,0 +1,17 @@
+
+.btn-register{
+  background-color: #107a79;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+
+  box-shadow: 0 4px 12px rgba(16, 122, 121, 0.3);
+}
+.w-60 {
+width: 120px;
+}
+.forgot-pass{
+    text-decoration: none;
+}
+.forgot-pass:hover{
+    text-decoration:underline;
+}
