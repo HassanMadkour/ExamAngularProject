@@ -7,10 +7,11 @@ import { ExamService } from '../../Services/ExamService/exam-service';
 import { LoadingSpinner } from "../../Components/loading-spinner/loading-spinner";
 import { delay } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { SearchBar } from "../../Components/search-bar/search-bar";
 
 @Component({
   selector: 'app-exam-questions',
-  imports: [QuestionsList, RouterLink, PaginationBar, LoadingSpinner , CommonModule],
+  imports: [QuestionsList, RouterLink, PaginationBar, LoadingSpinner, CommonModule, SearchBar],
   templateUrl: './exam-questions.html',
   styleUrl: './exam-questions.css'
 })
@@ -118,6 +119,22 @@ ngOnInit(): void {
       }
     });
   }
+ }
+ searchAboutQuestion(searchString : string | null) {
+  if(!searchString) {
+    this.changePage(this.selectedPage);
+    return;
+  };
+  this.questionService.searchAboutQuestion(this.examId , searchString).subscribe({
+    next: (response) => {
+      this.currentQuestions = response;
+      this.changeDetectorRef.detectChanges();
+    },
+    error: (error) => {
+      console.log(error);
+      this.changeDetectorRef.detectChanges();
+    }
+  });
  }
 }
 

@@ -1,5 +1,4 @@
 <div class="questions-list">
-  <app-search-bar></app-search-bar>
   @for (item of displayedQuestions; track $index) {
   <app-question-card
     (deleteQuestion)="removeQuestion($event)"

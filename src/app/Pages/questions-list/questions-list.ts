@@ -1,12 +1,10 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { QuestionService } from '../../Services/question-service';
+import { Component, EventEmitter, Input , Output,  } from '@angular/core';
 import { QuestionCard } from "./question-card/question-card";
 import { EmptyCard } from "../../Components/empty-card/empty-card";
-import { SearchBar } from "../../Components/search-bar/search-bar";
 
 @Component({
   selector: 'app-questions-list',
-  imports: [QuestionCard, EmptyCard, SearchBar],
+  imports: [QuestionCard, EmptyCard],
   templateUrl: './questions-list.html',
   styleUrl: './questions-list.css'
 })

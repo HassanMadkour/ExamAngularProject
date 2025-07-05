@@ -28,4 +28,7 @@ export class QuestionService {
   getQuestion(questionId : number) : Observable<IQuestionModel> {
     return this.httpClient.get(`${this.baseUrl}Admin/Question/${questionId}`) as Observable<IQuestionModel>;
   }
+  searchAboutQuestion(examId : number , searchString : string , page :number = 1 , size : number = 10) : Observable<IQuestionModel[]> {
+    return this.httpClient.get(`${this.baseUrl}Admin/Exam/${examId}/Questions/${searchString}?page=${page}&pageSize=${size}`) as Observable<IQuestionModel[]>;
+  }
 }
