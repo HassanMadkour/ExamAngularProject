@@ -100,11 +100,18 @@ this.examForm.get('duration')?.valueChanges.subscribe(() => {
         MinDegree: this.getMinDegree.value,
         MaxDegree: this.getMaxDegree.value,
         StartTime: this.getStartTime.value,
-        EndTime: this.getEndTime.value
+        EndTime: this.getEndTime.value,
+        Questions: []
       };
+      console.log(examDTO)
       this.examService.create(examDTO).subscribe({
         next: () => {
           this.router.navigate(['/examlist']);
+          
+        },
+        error:(err)=>{
+            console.error("ERROR", err);
+    console.log("Error details:", err.error);
         }
       }); 
       }else{

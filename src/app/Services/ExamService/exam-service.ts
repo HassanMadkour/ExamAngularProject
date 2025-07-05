@@ -9,7 +9,7 @@ import { IGetAllExam } from '../../Models/iget-all-exam';
 })
 export class ExamService {
   baseUrl : string ="https://localhost:7085/api/"
-apiUrl: string = 'https://localhost:7085/api/Exam';
+  apiUrl: string = 'https://localhost:7085/api/Exam';
   constructor(private http:HttpClient) { }
 
   gitAllExam(): Observable<IGetAllExam []>{

@@ -17,6 +17,7 @@ export class ExamList implements OnInit {
   searchKeyword!:string;
   constructor(private examService : ExamService,private cdr:ChangeDetectorRef){}
   ngOnInit(): void {
+  
     this.examService.gitAllExam().subscribe({
       next:(response)=>{
         this.exams = response;
@@ -54,6 +55,9 @@ export class ExamList implements OnInit {
       })
   }
 
+  isEnded(endTime: string|Date): boolean {
+  return new Date(endTime) <= this.datatoday;
+}
   deleteExam(id:number){
     console.log(id)
     var flag = confirm("Are you sure delete this Exam?");
