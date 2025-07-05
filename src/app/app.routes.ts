@@ -15,23 +15,23 @@ import { ForgotPassword } from './Components/Account/forgot-password/forgot-pass
 import { ResetPassword } from './Components/Account/reset-password/reset-password';
 
 export const routes: Routes = [
-    {path:"examform",component:ExamForm},
+    { path: "examform", component: ExamForm },
     { path: "examform/:id", component: ExamForm },
-    {path:'examlist',component:ExamList}
+    { path: 'examlist', component: ExamList }
     , {
-        path : "exam/:id/questions",component: ExamQuestions
+        path: "exam/:id/questions", component: ExamQuestions
     }, {
-        path : "exam/:id/questions/create",component: AddQuestion
-    },{
-        path : "exam/:id/questions/update/:questionId",component: UpdateQuestion
+        path: "exam/:id/questions/create", component: AddQuestion
+    }, {
+        path: "exam/:id/questions/update/:questionId", component: UpdateQuestion
     }, {
         path: "exam/:id/report", component: ExamReport
-    }, {path:'account/register' , component:Register} ,
-    {path:'account/login' , component:Login} ,
-    {path:'Account/ConfirmEmail' , component:ConfirmEmail} ,
-    {path:'account/forgotPassword' , component:ForgotPassword}, 
-    {path:'Account/ResetPassword' , component:ResetPassword} , 
-    {path:'account/changepassword' , component:ChangePassword , canActivate: [AuthGuard] } , 
+    }, { path: 'account/register', component: Register },
+    { path: 'account/login', component: Login },
+    { path: 'Account/ConfirmEmail', component: ConfirmEmail },
+    { path: 'account/forgotPassword', component: ForgotPassword },
+    { path: 'Account/ResetPassword', component: ResetPassword },
+    { path: 'account/changepassword', component: ChangePassword, canActivate: [AuthGuard] },
 
     { path: 'home', component: Home, canActivate: [AuthGuard] }
 ];
