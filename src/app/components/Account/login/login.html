@@ -1,0 +1,52 @@
+<div class="bg-account">
+  <div class="container  d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4 w-100" style="max-width: 450px; border-radius: 20px;">
+      <h2 class="text-center text-account-color mb-4">Login</h2>
+
+      <form [formGroup]="loginForm">
+
+        <div class="mb-3">
+          <label for="username" class="form-label">User Name</label>
+          <input [ngClass]="{'is-invalid':UserName.touched && ( UserName.hasError('required') || UserName.hasError('server')),
+          'is-valid':UserName.touched && !(UserName.hasError('required') ||UserName.hasError('server'))
+         }" formControlName="UserName" type="text" class="form-control" id="username"
+            placeholder="Enter your username">
+          @if (UserName.touched) {
+          @if(UserName.hasError("required")){
+          <span class="text-danger">User Name is Required</span>
+          }
+          }
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input [ngClass]="{'is-invalid':Password.touched && ( Password.hasError('required') || Password.hasError('server') || isServerErrors),
+          'is-valid':Password.touched && !(Password.hasError('required') ||Password.hasError('server'))
+         }" formControlName="Password" type="password" class="form-control" id="password" placeholder="••••••••">
+          @if (Password.touched) {
+          @if(Password.hasError("required")){
+          <span class="text-danger">Password is Required</span>
+          }
+          @if(Password.hasError("server")){
+          <span class="text-danger">Invalid User Name or Password</span>
+          }
+          }
+
+        </div>
+
+       
+       
+      
+         <button (click)="sumbit()" type="submit" class="btn btn-outline-account w-50 m-auto d-block">Login</button>
+
+        <a class="d-block m-auto w-60 text-dark mt-2 forgot-pass" [routerLink]="['/account/forgotPassword']">Forgot Password</a>
+
+        <hr>
+           <div class="mt-2 d-flex justify-content-between px-2">
+          <p class=" text-dark fs-5 mt-2">Don`t have an account? </p>
+          <a class="btn btn-register align-self-center" [routerLink]="['/account/register']">Register</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
