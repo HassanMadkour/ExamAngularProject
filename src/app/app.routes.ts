@@ -8,11 +8,12 @@ import { ExamReport } from './Pages/exam-report/exam-report';
 import { Register } from './Components/Account/register/register';
 import { Login } from './Components/Account/login/login';
 import { ConfirmEmail } from './Components/Account/confirm-email/confirm-email';
-import { Home } from './Components/Account/home/home';
 import { AuthGuard } from './Components/Account/AuthGaurd';
 import { ChangePassword } from './Components/Account/change-password/change-password';
 import { ForgotPassword } from './Components/Account/forgot-password/forgot-password';
 import { ResetPassword } from './Components/Account/reset-password/reset-password';
+import { Home } from './Pages/home/home';
+import { NotFound } from './Pages/not-found/not-found';
 
 export const routes: Routes = [
     { path: "examform", component: ExamForm },
@@ -33,7 +34,14 @@ export const routes: Routes = [
     { path: 'Account/ResetPassword', component: ResetPassword },
     { path: 'account/changepassword', component: ChangePassword, canActivate: [AuthGuard] },
 
-    { path: 'home', component: Home, canActivate: [AuthGuard] }
+    { path: 'home', component: Home },
+    {path:'notFound', component:NotFound},
+    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    , {
+        path: '**',
+        redirectTo: 'notFound',
+        pathMatch: 'full'
+    }
 ];
 
 
