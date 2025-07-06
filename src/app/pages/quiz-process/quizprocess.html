@@ -1,0 +1,189 @@
+<div class="quiz-game-container  d-flex flex-column m-0 p-0">
+  <div class="flex-grow-1 d-flex flex-column">
+
+    <div class="game-card card border-0 shadow-lg overflow-hidden">
+      <div class="game-header card-header py-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <h1 class="game-title mb-3 mb-md-0">
+            <i class="fas fa-dragon me-2"></i>QUIZ ADVENTURE
+          </h1>
+
+          <div class="d-flex gap-3">
+            <div class="level-indicator px-3 py-1 rounded-pill fw-bold">
+              <i class="fas fa-map-marked-alt me-2"></i>
+              Level: {{ (stepper?.selectedIndex || 0) + 1 }}/{{ questions.length }}
+            </div>
+            <div class="timer px-3 py-1 rounded-pill fw-bold"
+                 [class.bg-danger]="timeLeft <= 10"
+                 [class.pulse]="timeLeft <= 10">
+              <i class="fas fa-hourglass-half me-2"></i>{{ timeLeft }}s
+            </div>
+          </div>
+        </div>
+        <div class="xp-bar mt-3 rounded-pill">
+          <div class="xp-progress"
+               [style.width.%]="((stepper?.selectedIndex || 0) / questions.length) * 100">
+          </div>
+        </div>
+      </div>
+
+      <div class="game-content card-body p-0 p-md-4 position-relative">
+        @if (quizCompleted) {
+          <div class="floating-trophy position-absolute top-0 end-0 translate-middle-y">
+            <i class="fas fa-crown fa-3x"></i>
+          </div>
+        }
+
+        <mat-horizontal-stepper #stepper linear class="bg-transparent">
+          @for (question of questions; let i = $index; track trackByQuestionId($index, question)) {
+            <mat-step [stepControl]="answerForms[i]" [completed]="quizCompleted">
+              <ng-template matStepLabel>
+                <div class="step-label d-flex flex-column align-items-center px-2">
+                  <div class="step-icon d-flex align-items-center justify-content-center mb-1"
+                       [class.bg-main]="stepper?.selectedIndex === i"
+                       [style.backgroundColor]="stepper?.selectedIndex === i ? '#1D4645' : 'transparent'"
+                       [style.color]="stepper?.selectedIndex === i ? 'white' : '#1D4645'">
+                    <i class="fas fa-scroll"></i>
+                  </div>
+                  <span class="step-text">QUEST {{ i + 1 }}</span>
+                </div>
+              </ng-template>
+
+              <form [formGroup]="answerForms[i]">
+                <div class="quest-card card mb-4 position-relative">
+                  <div class="quest-badge position-absolute start-0 px-1 py-1 fw-bold">
+                    #{{ i + 1 }}
+                  </div>
+
+                  <div class="card-body p-4">
+                    <p class="quest-text card-title mb-4">
+                      {{ question.text }}
+                    </p>
+
+                    <mat-radio-group formControlName="answer" [disabled]="quizCompleted"
+                                     class="options-container d-grid gap-2">
+                      @for (option of question.options; track option; let j = $index) {
+                        <mat-radio-button [value]="option"
+                                          class="option-button"
+                                          [class.border-success]="quizCompleted && question.correctAnswer === option"
+                                          [class.bg-success-subtle]="quizCompleted && question.correctAnswer === option"
+                                          [class.border-danger]="quizCompleted && userAnswers[i]?.selected === option && !userAnswers[i].isCorrect"
+                                          [class.bg-danger-subtle]="quizCompleted && userAnswers[i]?.selected === option && !userAnswers[i].isCorrect">
+                          <div class="option-content d-flex align-items-center">
+                            <span class="option-letter d-flex align-items-center justify-content-center me-3">
+                              {{ getOptionLetter(j) }}
+                            </span>
+                            <span class="option-text flex-grow-1">
+                              {{ option }}
+                            </span>
+                            @if (quizCompleted) {
+                              <span class="answer-feedback ms-2">
+                                @if (userAnswers[i]?.selected === option && !userAnswers[i].isCorrect) {
+                                  <i class="fas fa-times-circle text-danger"></i>
+                                }
+                                @if (question.correctAnswer === option) {
+                                  <i class="fas fa-check-circle text-success"></i>
+                                }
+                              </span>
+                            }
+                          </div>
+                        </mat-radio-button>
+                      }
+                    </mat-radio-group>
+
+                    @if (quizCompleted && unansweredIndices.includes(i)) {
+                      <div class="feedback-message unanswered alert alert-warning mt-3 mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Quest Failed:</strong> You didn't choose an answer!
+                      </div>
+                    }
+
+                    @if (quizCompleted) {
+                      <div class="feedback-message correct-answer alert alert-success mt-3 mb-0">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Correct Answer:</strong> <span class="ms-1">{{ question.correctAnswer }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+
+                <div class="navigation-buttons d-flex justify-content-between mt-4">
+                  @if (i > 0) {
+                    <button mat-button matStepperPrevious
+                            class="nav-button previous-button btn">
+                      <i class="fas fa-arrow-circle-left me-2"></i> Previous
+                    </button>
+                  } @else {
+                    <div></div>
+                  }
+
+                  <div class="ms-auto">
+                    @if (i < questions.length - 1) {
+                      <button mat-button matStepperNext [disabled]="answerForms[i].invalid"
+                              class="nav-button next-button btn">
+                        <span class="position-relative z-2">
+                          Continue <i class="fas fa-arrow-circle-right ms-2"></i>
+                        </span>
+                        <span class="button" [style.width.%]="answerForms[i].valid ? 100 : 0"></span>
+                      </button>
+                    }
+
+                    @if (i === questions.length - 1) {
+                      <button mat-button (click)="submitQuiz()" [disabled]="answerForms[i].invalid"
+                              class="nav-button submit-button btn">
+                        <span class="position-relative z-2">
+                          <i class="fas fa-flag-checkered me-2"></i> Complete Quest!
+                        </span>
+                        <span class="button" [style.width.%]="answerForms[i].valid ? 100 : 0"></span>
+                      </button>
+                    }
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+          }
+
+          <!-- Results Step -->
+          <mat-step [completed]="quizCompleted">
+            <ng-template matStepLabel>
+              <div class="step-label d-flex flex-column align-items-center px-2">
+                <div class="step-icon d-flex align-items-center justify-content-center mb-1"
+                     style="background-color: #1D4645; color: white;">
+                  <i class="fas fa-trophy"></i>
+                </div>
+                <span class="step-text">RESULTS</span>
+              </div>
+            </ng-template>
+
+            <div class="victory-screen card p-4 p-md-5 text-center mx-auto">
+              <div class="trophy-icon mb-4">
+                <i class="fas fa-medal fa-4x text-warning"></i>
+              </div>
+
+              <h3 class="mb-4 fw-bold">ADVENTURE COMPLETED!</h3>
+
+              <div class="score-display d-flex flex-wrap justify-content-center align-items-center gap-2 mb-4 fs-3">
+                <span>You scored</span>
+                <span class="fw-bold">{{ score }}</span>
+                <span>out of</span>
+                <span class="fw-bold">{{ questions.length }}</span>
+              </div>
+
+              <div class="result-message p-3 p-md-4 rounded-3 mb-4 fst-italic position-relative">
+                <i class="fas fa-quote-left position-absolute top-0 start-0 m-2 opacity-25"></i>
+                {{ getResultMessage() }}
+                <i class="fas fa-quote-right position-absolute bottom-0 end-0 m-2 opacity-25"></i>
+              </div>
+<div class="action-buttons d-flex flex-wrap justify-content-center gap-3">
+  <button mat-button matStepperPrevious class="action-button review-button btn">
+    <i class="fas fa-book-open me-2 review-icon"></i> Review Quests
+  </button>
+</div>
+
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+</div>

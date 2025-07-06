@@ -1,0 +1,20 @@
+.nav-item{
+color: black;
+padding-left: 3%;
+font-weight: 600;
+}
+.nav-item:hover{
+color: #1D4645;
+}
+.btn{
+ border-color:  #1D4645;
+ color: #1D4645;
+
+}
+
+.btn:hover{
+ background-color:  #1D4645;
+ color: white;
+
+}
+

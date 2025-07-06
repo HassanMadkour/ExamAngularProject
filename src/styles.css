@@ -6,7 +6,7 @@
   border-radius: 10px;
   font-weight: 600;
   transition: all 0.3s ease-in-out;
-  margin: 10px  auto;
+  margin: 10px auto;
 }
 
 .btn-outline-account:hover {
@@ -21,10 +21,10 @@
 }
 
 .bg-account {
-background-color: #0c5f5e;
+  background-color: #0c5f5e;
 }
 
 .text-account-color {
-color: #107a79;;
+  color: #107a79;
+  ;
 }
-
