@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Quizprocess } from "../../pages/quiz-process/quizprocess";
+import { Quizprocess } from '../../Pages/quiz-process/quizprocess';
 
 @Component({
   selector: 'app-quiz-view',

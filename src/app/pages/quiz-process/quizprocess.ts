@@ -1,14 +1,13 @@
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { Component, OnInit, OnDestroy, ViewChild, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { QuizQuestion } from '../../models/quiz-question';
-import { QuizService } from '../../services/QuizServices/quiz.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { QuizQuestion } from '../../Models/quiz-question';
+import { QuizService } from '../../Services/QuizServices/quiz.service';
 
 @Component({
   selector: 'app-quizprocess',

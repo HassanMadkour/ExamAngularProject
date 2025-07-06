@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { QuizModel } from '../Models/quiz-model';
 
-import { QuizModel } from '../models/quiz-model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuizModel } from '../../models/quiz-model';
 import { Router } from '@angular/router';
+import { QuizModel } from '../../Models/quiz-model';
 
 @Component({
   selector: 'app-quiz-card',

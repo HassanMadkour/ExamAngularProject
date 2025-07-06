@@ -1,10 +1,10 @@
 import { Component, Pipe, PipeTransform } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { forwardRef } from "@angular/core";
-import { QuizService } from '../../services/quizdata';
-import { QuizModel } from '../../models/quiz-model';
 import { CommonModule } from '@angular/common';
 import { QuizCardComponent } from "../../customs/quiz-card/quiz-card";
+import { QuizModel } from '../../Models/quiz-model';
+import { QuizService } from '../../Services/quizdata';
 
 @Component({
   selector: 'app-quizzes',
