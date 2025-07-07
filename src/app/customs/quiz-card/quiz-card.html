@@ -2,27 +2,25 @@
   class="quiz-card position-relative p-4 rounded-4 h-100"
   (click)="navigateToQuiz()"
   style="cursor: pointer;"
-  [style.--hue]="randomHue"
 >
   <div class="icon-wrapper bg-white shadow-sm">
     <img
-      [src]="quiz.icon || 'assets/icons/default.png'"
+     
       (error)="onImgError($event)"
-      [alt]="quiz.title + ' icon'"
+      [alt]="quiz.name + ' icon'"
       width="32"
       height="32"
       class="img-fluid"
     />
   </div>
 
-  <h5 class="fw-bold mt-4 mb-3 text-truncate" [title]="quiz.title">
-    {{ quiz.title }}
+  <h5 class="fw-bold mt-4 mb-3 text-truncate" [title]="quiz.name">
+    {{ quiz.name }}
   </h5>
 
-  <p class="small mb-3">{{ quiz.description }}</p>
+  <p class="small mb-3">{{ quiz.duration }}</p>
 
   <div class="d-flex align-items-center">
     <span class="badge rounded-pill me-2">{{ randomQuestionCount }} Questions</span>
-    <span class="badge rounded-pill">{{ randomPlayerCount }} Players</span>
   </div>
 </div>

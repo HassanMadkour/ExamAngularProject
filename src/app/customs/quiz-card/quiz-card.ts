@@ -11,16 +11,27 @@ import { QuizModel } from '../../Models/quiz-model';
   styleUrls: ['./quiz-card.css']
 })
 export class QuizCardComponent {
-  constructor(private router: Router){}
+  constructor(private router: Router) {}
+
   @Input() quiz!: QuizModel;
-
-
   @Input() randomHue!: number;
   @Input() randomQuestionCount!: number;
-  @Input() randomPlayerCount!: number;
+
   navigateToQuiz(): void {
-    this.router.navigate(['quizScreen']);
+    const token = localStorage.getItem('token');
+    const isFromProfile = this.router.url.includes('profile');
+
+    if (token) {
+      if (isFromProfile) {
+        this.router.navigate([`/completedExam/${this.quiz.id}`]);
+      } else {
+        this.router.navigate(['/quizProcess']);
+      }
+    } else {
+      this.router.navigate(['/account/login']);
+    }
   }
+
   onImgError(event: Event) {
     (event.target as HTMLImageElement).src = 'assets/images/image.png';
   }

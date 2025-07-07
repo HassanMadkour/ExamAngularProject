@@ -19,7 +19,7 @@ loginForm = new FormGroup({
   UserName: new FormControl('',[Validators.required]) ,
   Password : new FormControl('' , [Validators.required]) ,
 
-})  
+})
 
 get UserName() {return this.loginForm.controls['UserName']}
 get Password() {return this.loginForm.controls['Password']}
@@ -28,28 +28,29 @@ isServerErrors:boolean = false ;
 errorMessage:string = ''
 
 sumbit() {
- 
+
 
    if(this.loginForm.status == "VALID") {
 
     this.loginModel = {...this.loginForm.value} as ILoginUser
    this.accountService.login(this.loginModel).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.token); 
-        this.routerObj.navigate(['/home']); 
+        localStorage.setItem('token', res.token);
+
+        this.routerObj.navigate(['/home']);
       },
       error: (err) => {
          this.loginForm.get("Password")?.setErrors({ server: err.error.message});
          this.loginForm.get("UserName")?.setErrors({ server: err.error.message});
 
-       
+
       }
     }); ;
    }else {
       this.loginForm.markAllAsTouched()
   return;
    }
-  
+
 }
 
 }

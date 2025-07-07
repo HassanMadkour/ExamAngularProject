@@ -1,17 +1,37 @@
-<nav class="navbar navbar-expand-lg bg-white shadow-none  px-5">
+<nav class="navbar navbar-expand-lg bg-white shadow-none px-5">
   <a class="navbar-brand" href="#">
     <img src="assets/images/logo.png" width="70" height="70" alt="QuizBaj Logo" />
   </a>
+
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
     <ul class="navbar-nav mx-auto">
-      <li class="nav-item "><a class="nav-link" href="#">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">About</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Portfolio</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
     </ul>
-    <button class="btn btn-outline-dark px-5">Login</button>
+
+    @if (accountService.isLoggedIn()) {
+      <div class="dropdown">
+        <button
+          class="btn btn-outline-dark dropdown-toggle px-4"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <i class="bi bi-person-circle me-2"></i> Account
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" (click)="goToProfile()">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    } @else {
+      <button class="btn btn-outline-dark px-5" (click)="goToLogin()">Login</button>
+    }
   </div>
 </nav>
