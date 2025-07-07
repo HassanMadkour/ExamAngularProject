@@ -1,0 +1,24 @@
+<section class="container mt-4">
+  @if (accountService.isLoggedIn()) {
+    <h2 class="mb-4">Completed Exams</h2>
+    <div class="row g-3">
+      @for (exam of completedExams; track exam) {
+        <div class="col-md-4">
+          <div class="card h-100" (click)="openCompletedExam(exam.id)" style="cursor: pointer;">
+            <div class="card-body">
+              <h5 class="card-title">{{ exam.examName }}</h5>
+              <p class="card-text">
+                Score: {{ exam.totalScore }} / {{ exam.maxMarks }}<br />
+                Passed: {{ exam.isPassed ? '✅ Yes' : '❌ No' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="alert alert-warning">
+      You need to <a routerLink="/account/login">login</a> to view your completed exams.
+    </div>
+  }
+</section>

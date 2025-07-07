@@ -23,7 +23,7 @@ loginForm = new FormGroup({
   UserName: new FormControl('',[Validators.required]) ,
   Password : new FormControl('' , [Validators.required]) ,
 
-})  
+})
 
 get UserName() {return this.loginForm.controls['UserName']}
 get Password() {return this.loginForm.controls['Password']}
@@ -32,7 +32,7 @@ isServerErrors:boolean = false ;
 errorMessage:string = ''
 
 sumbit() {
- 
+
 
    if(this.loginForm.status == "VALID") {
 
@@ -57,14 +57,14 @@ sumbit() {
          this.loginForm.get("Password")?.setErrors({ server: err.error.message});
          this.loginForm.get("UserName")?.setErrors({ server: err.error.message});
 
-       
+
       }
     }); ;
    }else {
       this.loginForm.markAllAsTouched()
   return;
    }
-  
+
 }
 
 }

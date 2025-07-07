@@ -1,105 +1,55 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { QuizModel } from '../Models/quiz-model';
-
+import { AccountService } from '../Components/services/account-service';
+import { CompletedExam } from '../Models/completed-exam';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
-  private quizzes: QuizModel[] = [
-    {
-      title: 'Math',
-      description: 'Sky was cloudless and of a deep dark blue spectacle before us was indeed',
-      icon: 'assets/icons/math.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'English',
-      description: 'Even the all-powerful Pointing has no control about the blind texts.',
-      icon: 'assets/icons/english.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'Science',
-      description: 'Unorthographic life One day however a small line of blind text.',
-      icon: '',
-      bg: 'bg-white'
-    },
-    {
-      title: 'Bangla',
-      description: 'However a small line of blind text by the name.',
-      icon: 'assets/icons/bangla.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'General Knowledge',
-      description: 'Text by the name of Lorem Ipsum decided to leave for the far World of Grammar.',
-      icon: 'assets/icons/general.png',
-      bg: 'bg-white'
-    },
-     {
-      title: 'Math',
-      description: 'Sky was cloudless and of a deep dark blue spectacle before us was indeed',
-      icon: 'assets/icons/math.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'English',
-      description: 'Even the all-powerful Pointing has no control about the blind texts.',
-      icon: 'assets/icons/english.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'Science',
-      description: 'Unorthographic life One day however a small line of blind text.',
-      icon: '',
-      bg: 'bg-white'
-    },
-    {
-      title: 'Bangla',
-      description: 'However a small line of blind text by the name.',
-      icon: 'assets/icons/bangla.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'General Knowledge',
-      description: 'Text by the name of Lorem Ipsum decided to leave for the far World of Grammar.',
-      icon: 'assets/icons/general.png',
-      bg: 'bg-white'
-    },
-     {
-      title: 'Math',
-      description: 'Sky was cloudless and of a deep dark blue spectacle before us was indeed',
-      icon: 'assets/icons/math.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'English',
-      description: 'Even the all-powerful Pointing has no control about the blind texts.',
-      icon: 'assets/icons/english.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'Science',
-      description: 'Unorthographic life One day however a small line of blind text.',
-      icon: '',
-      bg: 'bg-white'
-    },
-    {
-      title: 'Bangla',
-      description: 'However a small line of blind text by the name.',
-      icon: 'assets/icons/bangla.png',
-      bg: 'bg-light'
-    },
-    {
-      title: 'General Knowledge',
-      description: 'Text by the name of Lorem Ipsum decided to leave for the far World of Grammar.',
-      icon: 'assets/icons/general.png',
-      bg: 'bg-white'
-    }
-  ];
+    constructor(
+    private http: HttpClient,
+    private AccountService: AccountService
+  ) {}
+  private baseUrl: string = 'http://localhost:91/api/';
+  private notLoggedInUrl: string = this.baseUrl + 'exam';
+  private loggedInUrl: string = this.baseUrl + 'Student/exams/';
+  private passedExamsUrl = this.baseUrl + 'Student/';
+getCompletedExamsById(examId: string): Observable<CompletedExam> {
+  const token = localStorage.getItem('token');
+  const userId = this.AccountService.getUserIdFromToken();
 
-  getQuizzes(): QuizModel[] {
-    return this.quizzes;
+  if (token && userId) {
+    return this.http.get<CompletedExam>(
+      `${this.passedExamsUrl}${userId}/PassedExams/${examId}`
+    );
+  } else {
+    throw new Error('User is not logged in');
+  }
+}
+
+ getCompletedExams(): Observable<QuizModel[]> {
+    const token = localStorage.getItem('token');
+    const userId = this.AccountService.getUserIdFromToken();
+
+    if (token && userId) {
+      return this.http.get<QuizModel[]>(`${this.passedExamsUrl}${userId}/PassedExams`);
+    } else {
+      throw new Error('User is not logged in');
+    }
+  }
+  getQuizzes(): Observable<QuizModel[]> {
+const token = localStorage.getItem('token');
+    const userId = this.AccountService.getUserIdFromToken();
+          return this.http.get<QuizModel[]>(this.notLoggedInUrl);
+
+
+    // if (token && userId) {
+    //   return this.http.get<QuizModel[]>(`${this.loggedInUrl}${userId}`);
+    // } else {
+    //   return this.http.get<QuizModel[]>(this.notLoggedInUrl);
+    // }
   }
 }

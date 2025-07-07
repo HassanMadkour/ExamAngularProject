@@ -2,13 +2,10 @@
   <h2 class="fw-bold mb-5 display-4 text-center">All Quizzes</h2>
 
   <div class="row g-4">
-    @for (category of quizzes | shuffle; track category.title) {
+    @for (quiz of quizzes ; track quiz.id) {
       <div class="col-12 col-sm-6 col-lg-4">
         <app-quiz-card
-          [quiz]="category"
-          [randomHue]="randomHue()"
-          [randomQuestionCount]="randomQuestionCount()"
-          [randomPlayerCount]="randomPlayerCount()"
+          [quiz]="quiz"
         />
       </div>
     }

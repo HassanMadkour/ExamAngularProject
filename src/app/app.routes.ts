@@ -14,7 +14,10 @@ import { ForgotPassword } from './Components/Account/forgot-password/forgot-pass
 import { ResetPassword } from './Components/Account/reset-password/reset-password';
 import { Home } from './Pages/home/home';
 import { NotFound } from './Pages/not-found/not-found';
+import { AllQuizzes } from './componantsRahma/all-quizzes/all-quizzes';
 import { Quizprocess } from './Pages/quiz-process/quizprocess';
+import { Profile } from './componantsRahma/profile/profile';
+import { CompletedExamsComponant } from './componantsRahma/completed-exams-componant/completed-exams-componant';
 
 export const routes: Routes = [
     { path: "examform", component: ExamForm },
@@ -34,11 +37,14 @@ export const routes: Routes = [
     { path: 'account/forgotPassword', component: ForgotPassword },
     { path: 'Account/ResetPassword', component: ResetPassword },
     { path: 'account/changepassword', component: ChangePassword, canActivate: [AuthGuard] },
-
+{path:'quizProcess', component:Quizprocess,canActivate: [AuthGuard]},
     { path: 'home', component: Home },
     {path:'notFound', component:NotFound},
-    { path: '', redirectTo: 'home', pathMatch: 'full' } ,
-    {path:'quizprocess/:examId' , component:Quizprocess}
+    {path:'allQuizzes', component:AllQuizzes  },
+        {path:'profile', component:Profile  },
+  { path: 'completedExam/:examId', component: CompletedExamsComponant },
+
+    { path: '', redirectTo: 'home', pathMatch: 'full' }
     , {
         path: '**', 
         redirectTo: 'notFound',

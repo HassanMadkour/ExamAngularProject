@@ -1,6 +1,10 @@
 export interface QuizModel {
-   title: string;
-  description: string;
-  icon: string;
-  bg: string;
+  id: number;
+  name: string;
+  minDegree: number;
+  maxDegree: number;
+  duration: string;
+  startTime: string; 
+  endTime: string;
+  numberOfQuestions: number;
 }
