@@ -17,11 +17,6 @@ export class Home implements OnInit {
 
 if (token) {
   const decoded = jwtDecode<IJWTClaims>(token);
-  console.log('Decoded claims:', decoded);
-
-  console.log('id:', decoded.id);
-  console.log('userName:', decoded.userName);
-  console.log('role:', decoded.role);
 
 }
   }

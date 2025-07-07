@@ -14,6 +14,7 @@ import { ForgotPassword } from './Components/Account/forgot-password/forgot-pass
 import { ResetPassword } from './Components/Account/reset-password/reset-password';
 import { Home } from './Pages/home/home';
 import { NotFound } from './Pages/not-found/not-found';
+import { Quizprocess } from './Pages/quiz-process/quizprocess';
 
 export const routes: Routes = [
     { path: "examform", component: ExamForm },
@@ -36,9 +37,10 @@ export const routes: Routes = [
 
     { path: 'home', component: Home },
     {path:'notFound', component:NotFound},
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    { path: '', redirectTo: 'home', pathMatch: 'full' } ,
+    {path:'quizprocess/:examId' , component:Quizprocess}
     , {
-        path: '**',
+        path: '**', 
         redirectTo: 'notFound',
         pathMatch: 'full'
     }

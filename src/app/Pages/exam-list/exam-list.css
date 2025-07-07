@@ -20,6 +20,12 @@
   padding: 1rem 1.5rem;
   border-bottom: none;
 }
+.card-header2 {
+  background: linear-gradient(135deg, #4f415e 0%, #1c2638 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-bottom: none;
+}
 
 .exam-duration {
   background-color: rgba(255, 255, 255, 0.2);
@@ -31,7 +37,17 @@
 }
 
 .btn-start-exam {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #80a1a1 0%, #223a3b 100%);
+  border: none;
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+
+.btn-start-exam2 {
+  background: linear-gradient(135deg, #223342 0%, #0b383a 100%);
   border: none;
   border-radius: 30px;
   padding: 8px 20px;

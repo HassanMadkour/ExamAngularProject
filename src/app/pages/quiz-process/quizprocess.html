@@ -1,3 +1,4 @@
+
 <div class="quiz-game-container  d-flex flex-column m-0 p-0">
   <div class="flex-grow-1 d-flex flex-column">
 
@@ -57,18 +58,18 @@
 
                   <div class="card-body p-4">
                     <p class="quest-text card-title mb-4">
-                      {{ question.text }}
+                      {{ question.questionText }}
                     </p>
 
                     <mat-radio-group formControlName="answer" [disabled]="quizCompleted"
                                      class="options-container d-grid gap-2">
                       @for (option of question.options; track option; let j = $index) {
-                        <mat-radio-button [value]="option"
+                        <mat-radio-button [value]="j + 1"
                                           class="option-button"
                                           [class.border-success]="quizCompleted && question.correctAnswer === option"
                                           [class.bg-success-subtle]="quizCompleted && question.correctAnswer === option"
-                                          [class.border-danger]="quizCompleted && userAnswers[i]?.selected === option && !userAnswers[i].isCorrect"
-                                          [class.bg-danger-subtle]="quizCompleted && userAnswers[i]?.selected === option && !userAnswers[i].isCorrect">
+                                          [class.border-danger]="quizCompleted && userAnswers[i]?.selectedAnswer?.toString()  === option && !userAnswers[i].isCorrect"
+                                          [class.bg-danger-subtle]="quizCompleted && userAnswers[i]?.selectedAnswer?.toString() === option && !userAnswers[i].isCorrect">
                           <div class="option-content d-flex align-items-center">
                             <span class="option-letter d-flex align-items-center justify-content-center me-3">
                               {{ getOptionLetter(j) }}
@@ -78,7 +79,7 @@
                             </span>
                             @if (quizCompleted) {
                               <span class="answer-feedback ms-2">
-                                @if (userAnswers[i]?.selected === option && !userAnswers[i].isCorrect) {
+                                @if (userAnswers[i]?.selectedAnswer?.toString() === option && !userAnswers[i].isCorrect) {
                                   <i class="fas fa-times-circle text-danger"></i>
                                 }
                                 @if (question.correctAnswer === option) {
@@ -166,7 +167,7 @@
                 <span>You scored</span>
                 <span class="fw-bold">{{ score }}</span>
                 <span>out of</span>
-                <span class="fw-bold">{{ questions.length }}</span>
+                <span class="fw-bold">{{ calculateTotalScoreOfExam() }}</span>
               </div>
 
               <div class="result-message p-3 p-md-4 rounded-3 mb-4 fst-italic position-relative">
@@ -187,3 +188,4 @@
     </div>
   </div>
 </div>
+

@@ -1,6 +1,7 @@
 export interface QuizQuestion {
-  id: number;
-  text: string;
+  questionId: number;
+  questionText: string;
   correctAnswer: string;
   options: string[];
+  score?:number
 }

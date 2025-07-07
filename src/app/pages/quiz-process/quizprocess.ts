@@ -1,5 +1,5 @@
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { Component, OnInit, OnDestroy, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, inject, ChangeDetectorRef, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -8,6 +8,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { QuizQuestion } from '../../Models/quiz-question';
 import { QuizService } from '../../Services/QuizServices/quiz.service';
+import { IAnswerQuestion } from '../../Models/ianswer-question';
+import { ISubmitionExam } from '../../Models/isubmition-exam';
+import { ActivatedRoute } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+import { IJWTClaims } from '../../Components/models/ijwtclaims';
 
 @Component({
   selector: 'app-quizprocess',
@@ -15,7 +20,7 @@ import { QuizService } from '../../Services/QuizServices/quiz.service';
   templateUrl: './quizprocess.html',
   styleUrls: ['./quizprocess.css'],
   imports: [
-      CommonModule,
+    CommonModule,
     MatStepperModule,
 
     MatFormFieldModule,
@@ -26,64 +31,64 @@ import { QuizService } from '../../Services/QuizServices/quiz.service';
   ]
 })
 export class Quizprocess implements OnInit, OnDestroy {
+  constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute) { }
   @ViewChild('stepper') stepper!: MatStepper;
 
-  questions: QuizQuestion[] = [];
+  questions!: QuizQuestion[];
   answerForms: FormGroup[] = [];
   quizCompleted = false;
   score = 0;
-  userAnswers: { selected: string, isCorrect: boolean }[] = [];
+  userAnswers: { isCorrect: boolean, selectedAnswer: number }[] = [];
   unansweredIndices: number[] = [];
   timeLeft = 60;
   timerInterval: any;
   timeOver = false;
-
+  userId!: string;
+  examId!: string;
   private fb = inject(FormBuilder);
   private quizService = inject(QuizService);
-getOptionLetter(index: number): string {
-  return String.fromCharCode(65 + index);
-}
-  ngOnInit() {
-    this.quizService.getQuizQuestions().subscribe((data) => {
-      if (data && data.length > 0) {
-        this.questions = data;
-      } else {
-        this.setFallbackQuestions();
-      }
-      this.buildForm();
-      this.startTimer();
-    }, () => {
-      this.setFallbackQuestions();
-      this.buildForm();
-      this.startTimer();
-    });
+  getOptionLetter(index: number): string {
+    return String.fromCharCode(65 + index);
   }
+  ngOnInit() {
 
+    this.examId = this.route.snapshot.paramMap.get('examId') || '';
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode<IJWTClaims>(token);
+      this.userId = decodedToken.id;
+    }
+    this.quizService.getExamQuestions(this.examId).subscribe({
+      next: (data) => {
+
+        if (data && data.length > 0) {
+
+          this.questions = [];
+          data.forEach((element: any, index: number) => {
+            this.questions.push({ questionText: element.questionText, questionId: element.questionId, score: element.score, options: [], correctAnswer:'' })
+            this.questions[index].options.push(element.choice1)
+            this.questions[index].options.push(element.choice2)
+            this.questions[index].options.push(element.choice3)
+            this.questions[index].options.push(element.choice4)
+          });
+
+          this.buildForm();
+          this.startTimer();
+          this.cdr.detectChanges();
+
+
+        }
+
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
+
+
+  }
   ngOnDestroy() {
     clearInterval(this.timerInterval);
-  }
-
-  setFallbackQuestions() {
-    this.questions = [
-      {
-        id: 1,
-        text: 'What is the capital of France?',
-        correctAnswer: 'Paris',
-        options: ['Berlin', 'Madrid', 'Paris', 'Rome']
-      },
-      {
-        id: 2,
-        text: 'Which planet is known as the Red Planet?',
-        correctAnswer: 'Mars',
-        options: ['Earth', 'Venus', 'Mars', 'Jupiter']
-      },
-      {
-        id: 3,
-        text: 'What is the largest mammal?',
-        correctAnswer: 'Blue Whale',
-        options: ['Elephant', 'Blue Whale', 'Giraffe', 'Polar Bear']
-      }
-    ];
   }
 
   buildForm() {
@@ -98,30 +103,35 @@ getOptionLetter(index: number): string {
     this.score = 0;
     this.userAnswers = [];
     this.unansweredIndices = [];
-
+    let submitionExam: ISubmitionExam = { userId: +this.userId, examId: +this.examId, answers: [] };
     this.questions.forEach((q, i) => {
       const selected = this.answerForms[i].value.answer;
+      submitionExam.answers.push({ questionId: q.questionId, selectedAnswer: selected })
 
-      if (!selected) {
-        this.unansweredIndices.push(i);
-        this.userAnswers.push({ selected: '', isCorrect: false });
-        return;
-      }
-
-      const isCorrect = selected === q.correctAnswer;
-      this.userAnswers.push({ selected, isCorrect });
-
-      if (isCorrect) {
-        this.score++;
-      }
     });
+    
+      
 
+
+    this.quizService.submitExam(submitionExam).subscribe({
+      next: (data) => {
+        this.questions.forEach((ques , i ) => {
+          ques.correctAnswer = data.details[i].correctAnswer;
+        })
+        this.score = data.totalScore;
+      },
+      error: (err) => {
+        console.log("error in submition exam ", err)
+      }
+
+    })
     this.quizCompleted = true;
     clearInterval(this.timerInterval);
     setTimeout(() => {
       if (this.stepper) {
-        this.stepper.selectedIndex = this.questions.length; 
+        this.stepper.selectedIndex = this.questions.length;
       }
+      return;
     });
   }
 
@@ -155,6 +165,10 @@ getOptionLetter(index: number): string {
   }
 
   trackByQuestionId(index: number, question: QuizQuestion): number {
-    return question.id;
+    return question.questionId;
+  }
+
+  calculateTotalScoreOfExam() {
+    return this.questions.reduce((total, question) => total + question.score!, 0);
   }
 }
