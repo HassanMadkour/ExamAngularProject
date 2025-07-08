@@ -13,7 +13,7 @@ export class QuizService {
     private http: HttpClient,
     private AccountService: AccountService
   ) {}
-  private baseUrl: string = 'http://localhost:91/api/';
+  private baseUrl: string = 'https://localhost:7085/api/';
   private notLoggedInUrl: string = this.baseUrl + 'exam';
   private loggedInUrl: string = this.baseUrl + 'Student/exams/';
   private passedExamsUrl = this.baseUrl + 'Student/';

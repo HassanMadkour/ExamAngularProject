@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AccountService } from '../../Components/services/account-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+import { IJWTClaims } from '../../Components/models/ijwtclaims';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,9 +10,18 @@ import { Router } from '@angular/router';
   templateUrl: './nav-bar.html',
   styleUrl: './nav-bar.css'
 })
-export class NavBar {
-constructor(public accountService: AccountService, private router: Router) {}
-
+export class NavBar implements OnInit {
+  userName!:string
+constructor(public accountService: AccountService, private router: Router , private cdr:ChangeDetectorRef) {}
+  ngOnInit(): void {
+    let token = localStorage.getItem('token');
+     if (token) {
+      const decoded = jwtDecode<IJWTClaims>(token);
+       this.cdr.detectChanges(); 
+       this.userName = decoded.userName ;
+      
+     }
+  }
   logout(): void {
     this.accountService.logout();
   }

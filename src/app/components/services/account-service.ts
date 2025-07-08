@@ -14,7 +14,7 @@ import { IJWTClaims } from '../models/ijwtclaims';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl:string = 'http://localhost:91/api/Account'
+  baseUrl:string = 'https://localhost:7085/api/Account'
 
   constructor(private http:HttpClient , private router:Router) { }
 
@@ -35,7 +35,7 @@ registerUser(user:IRegisterUser) : Observable<{ message: string }> {
 
 confirmEmail(userId:string,token:string) {
   return this.http.get<{ signInToken: string }>(
-      `http://localhost:91/api/Account/ConfirmEmail?userId=${userId}&token=${token}`
+      `'https://localhost:7085/api/Account/ConfirmEmail?userId=${userId}&token=${token}`
     );
 }
 

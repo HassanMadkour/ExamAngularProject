@@ -57,10 +57,14 @@
                   </div>
 
                   <div class="card-body p-4">
-                    <p class="quest-text card-title mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <p class="quest-text card-title mb-4">
                       {{ question.questionText }}
                     </p>
-
+                      <p class="quest-text card-title mb-4">
+                      Score : {{ question.score }}
+                    </p>
+                    </div>
                     <mat-radio-group formControlName="answer" [disabled]="quizCompleted"
                                      class="options-container d-grid gap-2">
                       @for (option of question.options; track option; let j = $index) {

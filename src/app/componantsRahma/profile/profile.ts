@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { QuizService } from '../../Services/quizdata';
 import { QuizModel } from '../../Models/quiz-model';
 import { AccountService } from '../../Components/services/account-service';
@@ -16,13 +16,20 @@ completedExams: any[] = [];
   constructor(
     private quizService: QuizService,
     public accountService: AccountService, 
-    private router: Router
+    private router: Router ,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     if (this.accountService.isLoggedIn()) {
       this.quizService.getCompletedExams().subscribe({
-        next: (data) => (this.completedExams = data),
+        next: (data) =>
+           {
+            this.completedExams = data 
+            this.cdr.detectChanges(); // Ensure the view updates with the new data
+            console.log(data);
+          },
+        
         error: (err) => console.error('Error fetching exams:', err),
       });
     }

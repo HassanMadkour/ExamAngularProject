@@ -25,7 +25,7 @@ export class QuizCardComponent {
       if (isFromProfile) {
         this.router.navigate([`/completedExam/${this.quiz.id}`]);
       } else {
-        this.router.navigate(['/quizProcess']);
+        this.router.navigate([`/quizProcess/${this.quiz.id}`]);
       }
     } else {
       this.router.navigate(['/account/login']);

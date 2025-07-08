@@ -37,7 +37,7 @@ export const routes: Routes = [
     { path: 'account/forgotPassword', component: ForgotPassword },
     { path: 'Account/ResetPassword', component: ResetPassword },
     { path: 'account/changepassword', component: ChangePassword, canActivate: [AuthGuard] },
-{path:'quizProcess', component:Quizprocess,canActivate: [AuthGuard]},
+    {path:'quizProcess/:examId', component:Quizprocess},
     { path: 'home', component: Home },
     {path:'notFound', component:NotFound},
     {path:'allQuizzes', component:AllQuizzes  },
