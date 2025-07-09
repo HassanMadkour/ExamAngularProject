@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { QuizService } from '../../Services/quizdata';
-import { QuizModel } from '../../Models/quiz-model';
 import { AccountService } from '../../Components/services/account-service';
 import { Router } from '@angular/router';
 

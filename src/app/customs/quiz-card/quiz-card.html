@@ -7,15 +7,15 @@
     <img
      
       (error)="onImgError($event)"
-      [alt]="quiz.name + ' icon'"
+      [alt]="quiz.examName + ' icon'"
       width="32"
       height="32"
       class="img-fluid"
     />
   </div>
 
-  <h5 class="fw-bold mt-4 mb-3 text-truncate" [title]="quiz.name">
-    {{ quiz.name }}
+  <h5 class="fw-bold mt-4 mb-3 text-truncate" [title]="quiz.examName">
+    {{ quiz.examName }}
   </h5>
 
   <p class="small mb-3">{{ quiz.duration }}</p>

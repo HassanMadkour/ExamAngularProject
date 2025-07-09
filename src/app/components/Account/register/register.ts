@@ -37,8 +37,8 @@ this.submitted = true ;
   this.registerModel = {...this.registerForm.value} as IRegisterUser
   this.accountService.registerUser(this.registerModel).subscribe({
   next: () => {
-    
-    this.routerObj.navigate(['/Account/ConfirmEmail'])
+    alert("Please Check Your Email To Confirm Account Before Login");
+    this.routerObj.navigate(['/account/login'])
    
   },
   error: (errors) => {

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { QuizModel } from '../../Models/quiz-model';
+import { INewQuizModel } from '../../Models/inew-quiz-model';
 
 @Component({
   selector: 'app-quiz-card',
@@ -13,7 +13,7 @@ import { QuizModel } from '../../Models/quiz-model';
 export class QuizCardComponent {
   constructor(private router: Router) {}
 
-  @Input() quiz!: QuizModel;
+  @Input() quiz!: INewQuizModel;
   @Input() randomHue!: number;
   @Input() randomQuestionCount!: number;
 
@@ -23,9 +23,11 @@ export class QuizCardComponent {
 
     if (token) {
       if (isFromProfile) {
-        this.router.navigate([`/completedExam/${this.quiz.id}`]);
+        this.router.navigate([`/completedExam/${this.quiz.examId}`]);
       } else {
-        this.router.navigate([`/quizProcess/${this.quiz.id}`]);
+        console.log(this.quiz.examId);
+        console.log(this.quiz);
+        this.router.navigate([`/quizProcess/${this.quiz.examId}`]);
       }
     } else {
       this.router.navigate(['/account/login']);

@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { QuizCardComponent } from '../../customs/quiz-card/quiz-card';
-import { QuizModel } from '../../Models/quiz-model';
 import { QuizService } from '../../Services/quizdata';
+import { INewQuizModel } from '../../Models/inew-quiz-model';
 
 @Component({
   selector: 'app-all-quizzes',
@@ -13,7 +13,7 @@ import { QuizService } from '../../Services/quizdata';
   styleUrl: './all-quizzes.css'
 })
 export class AllQuizzes {
-  quizzes: QuizModel[] = [];
+  quizzes: INewQuizModel[] = [];
   hues: number[] = [];
 
   constructor(
