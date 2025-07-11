@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { forwardRef } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuizCardComponent } from "../../customs/quiz-card/quiz-card";
 import { QuizService } from '../../Services/quizdata';
@@ -8,7 +7,7 @@ import { INewQuizModel } from '../../Models/inew-quiz-model';
 
 @Component({
   selector: 'app-quizzes',
-  imports: [CommonModule,RouterLink, RouterLinkActive, QuizCardComponent],
+  imports: [CommonModule, QuizCardComponent],
   templateUrl: './quizzes.html',
   styleUrl: './quizzes.css'
 })
@@ -20,7 +19,7 @@ export class Quizzes implements OnInit {
   }
   ngOnInit(): void {
         this.quizService.getQuizzes().subscribe((data) => {
-     
+
           this.quizzes = data;
           this.cdr.detectChanges();
           console.log( data);

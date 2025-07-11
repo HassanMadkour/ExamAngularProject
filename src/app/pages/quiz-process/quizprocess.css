@@ -1,175 +1,107 @@
-.quiz-game-container {
-height: 100vh;
-overflow: hidden;
-}
-.bg-main{
-  background-color: #155724;
-}
-.game-card {
-  /* border-radius: 20px; */
-  border: 4px solid #1D4645 !important;
+:root {
+  --bs-primary: #1D4645;
 }
 
-.game-header {
-  background-color: #1D4645;
+.btn-primary {
+  background-color: #163635!important;
+  border-color: #163635 !important;
+  color: white !important;
+}
+.btn-light {
+  background-color: white!important;
+  color: #163635 !important;
+}
+.btn-primary:hover {
+  background-color: #163635 !important;
+  border-color: #163635 !important;
 }
 
-.game-title {
-  font-size: 2rem;
-  font-weight: bold;
+.text-primary {
+  color: #163635 !important;
+}
+
+.bg-primary {
+  background-color: #163635 !important;
+  color: white;
+
+.pulse {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.options-container {
+  .mat-radio-button {
+    transition: all 0.2s ease;
+
+    &:hover:not(.mat-radio-disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &.mat-radio-checked {
+      background-color: rgba(29, 70, 69, 0.05);
+    }
+  }
+}
+
+.button-fill {
+  transition: width 0.3s ease;
+}
+
+.quiz-stepper {
+  .mat-horizontal-stepper-header-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .mat-step-header {
+    height: auto;
+    padding: 0.5rem;
+  }
+}
+
+/* Optional: Light text for quiz backgrounds */
+.quiz-game-container,
+.game-card,
+.quest-card,
+.victory-screen,
+.game-content {
   color: white;
 }
-
-.level-indicator {
-  background-color: #FFF2E6;
-  color: #1D4645;
+::ng-deep .mat-step-header .mat-step-icon {
+  display: none !important;
 }
 
-.timer {
-  background-color: #1D4645;
-  color: white;
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .header-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 1rem;
+
+    .empty-space {
+      display: none;
+    }
+
+    .next-button-wrapper {
+      width: 100%;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
 }
-
-.xp-bar {
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
-}
-
-.xp-progress {
-  height: 100%;
-  border-radius: 50px;
-  background: linear-gradient(90deg, #FFF2E6 0%, #FFD700 100%);
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.floating-trophy i {
-  color: #1D4645;
-}
-
-.step-icon {
-  width: 40px;
-  height: 40px;
-  background-color: #155724;
-  border: 2px solid #1D4645;
-}
-
-.step-text {
-  color: #1D4645;
-  font-weight: bold;
-  font-size: 0.875rem;
-}
-
-.quest-card {
-  border: 2px solid #1D4645;
-  border-radius: 15px;
-}
-
-.quest-badge {
-  background-color: #1D4645;
-  color: white;
-  transform: rotate(-15deg) translateX(-10px);
-  top: 15px;
-  border-radius: 5px;
-}
-
-.quest-text {
-  color: #1D4645;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.options-container .mat-radio-button {
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #1D4645;
-}
-
-.option-letter {
-  width: 24px;
-  height: 24px;
-  background-color: #1D4645;
-  color: white;
-}
-
-.feedback-message {
-  margin-top: 1rem;
-}
-
-.unanswered {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.correct-answer {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.navigation-buttons .btn {
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  background-color: #155724;
-  color: white;
-}
-
-/* .previous-button {
-  border: 2px solid #1D4645;
-  background-color: transparent;
-  color: #1D4645;
-} */
-
-/* .next-button,
-.submit-button {
-  background-color: #1D4645;
-  color: white;
-  position: relative;
-  overflow: hidden;
-} */
-
-.button-highlight {
-  background-color: rgba(255, 255, 255, 0.25);
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  z-index: 1;
-}
-
-.victory-screen {
-  max-width: 600px;
-  border: 2px solid #1D4645;
-  border-radius: 20px;
-  background-color: white;
-}
-
-.victory-screen h3,
-.victory-screen .score-display span {
-  color: #1D4645;
-}
-
-.result-message {
-  background-color: rgba(29, 70, 69, 0.1);
-  color: #1D4645;
-  border-radius: 0.75rem;
-}
-.review-button {
-  border: 2px solid #1D4645;
-  background-color: transparent;
-  color: black;
-  transition: all 0.3s ease;
-}
-
-.review-button .review-icon {
-  color: #1D4645;
-  transition: color 0.3s ease;
-}
-
-.review-button:hover {
-  background-color: #1D4645;
-  color: white;
-}
-
-.review-button:hover .review-icon {
-  color: white;
 }

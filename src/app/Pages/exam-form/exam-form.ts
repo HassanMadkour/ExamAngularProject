@@ -107,13 +107,13 @@ this.examForm.get('duration')?.valueChanges.subscribe(() => {
       this.examService.create(examDTO).subscribe({
         next: () => {
           this.router.navigate(['/examlist']);
-          
+
         },
         error:(err)=>{
             console.error("ERROR", err);
     console.log("Error details:", err.error);
         }
-      }); 
+      });
       }else{
         const duration = this.getDuration.value;
       const durationString = `${duration.hours.toString().padStart(2, '0')}:${duration.minutes.toString().padStart(2, '0')}:00`;
@@ -152,7 +152,7 @@ this.examForm.get('duration')?.valueChanges.subscribe(() => {
 
   const endTimeFormatted = end.toISOString().slice(0, 16);
 
-  this.getEndTime.setValue(endTimeFormatted, { emitEvent: false }); 
+  this.getEndTime.setValue(endTimeFormatted, { emitEvent: false });
 }
 
 }

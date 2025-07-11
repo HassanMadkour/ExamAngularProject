@@ -4,10 +4,10 @@
     <h1 class="fw-bold content text-main">Quiz & Win</h1>
     <h1 class="fw-bold content text-main">Cash Daily!</h1>
     <p class="fs-6 text-muted py-2">Win up to 20$ monthly from QuizBaj.</p>
-
+    @if (!accountService.isLoggedIn()) {
     <div class="input-group mt-3 mx-auto mx-lg-0" style="max-width: 400px;">
-      <button class="btn register-btn fw-bold w-100">Register Now</button>
-    </div>
+      <button class="btn register-btn fw-bold w-100" (click)="goToRegister()">Register Now</button>
+    </div>}
 
     <div class="mt-4">
       <p class="text-uppercase text-secondary fw-semibold mb-1">Number of Active Users Right Now</p>

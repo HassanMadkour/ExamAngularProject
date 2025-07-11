@@ -27,12 +27,12 @@
 }
 
 .search-input::placeholder {
-    color: #aaa;
+    color: #163635;
 }
 
 .search-box i {
     font-size: 18px;
-    color: #555;
+    color: #163635;
     margin-left: 10px;
     cursor: pointer;
     transition: color 0.2s;

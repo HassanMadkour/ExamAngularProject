@@ -1,112 +1,126 @@
-<div class="bg-account">
-  <div class="container d-flex justify-content-center align-items-center">
-  <div class="card shadow-lg p-4 mt-3 w-100" style="max-width: 450px; border-radius: 20px; margin-bottom: 4px;">
-    <h2 class="text-center mb-3 text-account-color">Create Account</h2>
-
-    <form [formGroup]="registerForm">
- 
-      <div class="mb-2">
-        <label for="username" class="form-label">User Name</label>
-        <input
-        [ngClass]="{'is-invalid':userName.touched && ( userName.hasError('required') || userName.hasError('server')),
-          'is-valid':userName.touched && !(userName.hasError('required') ||userName.hasError('server'))
-         }"
-        formControlName="username"  type="text" class="form-control" id="username" placeholder="Enter your username">
-        @if (userName.touched) {
-          @if(userName.hasError("required")){
-            <span class="text-danger">User Name is Required</span>
-          }@else if (userName.hasError("server")) {
-            <span class="text-danger">User Name is already exist</span>
-
-          }
-        }
-      </div>
-
-
-      <div class="mb-2">
-        <label for="email" class="form-label">Email address</label>
-        <input
-         [ngClass]="{'is-invalid':email.touched && ( email.hasError('required') || email.hasError('email') || email.hasError('server')),
-          'is-valid':email.touched && !( email.hasError('required') || email.hasError('email')  || email.hasError('server'))
-         }"
-           formControlName="email" type="email" class="form-control" id="email" placeholder="example@domain.com">
-
-         @if (email.touched ) {
-          @if(email.hasError("required")){
-            <span class="text-danger">Email is Required</span>
-          }@else if (email.hasError("email")) {
-            <span class="text-danger">Please Enter Valid Email</span>
-          }@else if (email.hasError("server")) {
-            <span class="text-danger">Email is already exist</span>
-
-          }
-        }
-      </div>
-
-   
-      <div class="mb-2">
-        <label for="phone" class="form-label">Phone Number</label>
-        <input 
-         [ngClass]="{'is-invalid':phoneNumber.touched && ( phoneNumber.hasError('required') || phoneNumber.hasError('pattern')),
-          'is-valid':phoneNumber.touched && !( phoneNumber.hasError('required') || phoneNumber.hasError('pattern'))
-         }"
-        formControlName="phoneNumber" type="tel" class="form-control" id="phone" placeholder="01xxxxxxxxx">
-          @if (phoneNumber.touched) {
-          @if(phoneNumber.hasError("required")){
-            <span class="text-danger">Phone Number is Required</span>
-          }@else if (phoneNumber.hasError("pattern")) {
-            <span class="text-danger">Please Enter Valid PhoneNumber</span>
-          }
-        }
-      
-      </div>
-
-   
-      <div class="mb-2">
-        <label for="password" class="form-label">Password</label>
-        <input
-         [ngClass]="{'is-invalid':password.touched  &&  (password.hasError('required') || password.hasError('server')),
-          'is-valid':password.touched && !( password.hasError('required') || password.hasError('server')) 
-         }"
-        formControlName="password" type="password" class="form-control" id="password" placeholder="••••••••">
-     
-          @if (password.touched) {
-          @if(password.hasError("required")){
-            <span class="text-danger">Password is Required</span>
-          }@else if (password.hasError("server")) {
-            <span class="text-danger">Please Make Password Contain Capital Letters And Special Characters</span>
-
-          }
-        }
-      </div>
-
-      <div class="mb-2">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input 
-         [ngClass]="{'is-invalid':confirmPassword.touched  &&  (confirmPassword.hasError('required') || confirmPassword.hasError('server')),
-          'is-valid':confirmPassword.touched && !( confirmPassword.hasError('required') || confirmPassword.hasError('server'))
-         }"
-        formControlName="confirmpassword" type="password" class="form-control" id="confirmPassword" placeholder="••••••••">
-          @if (confirmPassword.touched) {
-          @if(confirmPassword.hasError("required")){
-            <span class="text-danger">Confirm Password is Required</span>
-          }@else if (confirmPassword.hasError("server")) {
-            <span class="text-danger">The password and confirm password Must be matched</span>
-
-          }
-        }
-      </div>
-
-      <button (click)="sumbit()" type="submit" class=" d-block btn btn-outline-account m-auto w-50">Register</button>
-      <hr class="text-account-color mb-0">
-   
-
-       <div class=" d-flex justify-content-between px-2 mt-2">
-          <p class=" text-dark fs-5 mt-2">Already have an account? </p>
-          <a class="btn btn-login align-self-center" [routerLink]="['/account/login']">Login</a>
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="text-center mb-4">
+        <div class="auth-logo">
+          <i class="fas fa-user-plus"></i>
         </div>
-    </form>
-  </div>
+        <h2 class="auth-title">Create Account</h2>
+      </div>
+    </div>
+
+    <div class="auth-body">
+      <form [formGroup]="registerForm">
+
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">User Name</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user input-icon"></i>
+            <input id="username" type="text" formControlName="username" placeholder="Enter your username"
+              [ngClass]="{
+                'invalid': userName.touched && (userName.hasError('required') || userName.hasError('server')),
+                'valid': userName.touched && !(userName.hasError('required') || userName.hasError('server'))
+              }" />
+          </div>
+          @if (userName.touched) {
+            @if (userName.hasError('required')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> User Name is Required</div>
+            } @else if (userName.hasError('server')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> User Name already exists</div>
+            }
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope input-icon"></i>
+            <input id="email" type="email" formControlName="email" placeholder="example@domain.com"
+              [ngClass]="{
+                'invalid': email.touched && (email.hasError('required') || email.hasError('email') || email.hasError('server')),
+                'valid': email.touched && !(email.hasError('required') || email.hasError('email') || email.hasError('server'))
+              }" />
+          </div>
+          @if (email.touched) {
+            @if (email.hasError('required')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Email is Required</div>
+            } @else if (email.hasError('email')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Please enter a valid Email</div>
+            } @else if (email.hasError('server')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Email already exists</div>
+            }
+          }
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <div class="input-wrapper">
+            <i class="fas fa-phone input-icon"></i>
+            <input id="phone" type="tel" formControlName="phoneNumber" placeholder="01xxxxxxxxx"
+              [ngClass]="{
+                'invalid': phoneNumber.touched && (phoneNumber.hasError('required') || phoneNumber.hasError('pattern')),
+                'valid': phoneNumber.touched && !(phoneNumber.hasError('required') || phoneNumber.hasError('pattern'))
+              }" />
+          </div>
+          @if (phoneNumber.touched) {
+            @if (phoneNumber.hasError('required')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Phone Number is Required</div>
+            } @else if (phoneNumber.hasError('pattern')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Enter a valid phone number</div>
+            }
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input id="password" type="password" formControlName="password" placeholder="••••••••"
+              [ngClass]="{
+                'invalid': password.touched && (password.hasError('required') || password.hasError('server')),
+                'valid': password.touched && !(password.hasError('required') || password.hasError('server'))
+              }" />
+          </div>
+          @if (password.touched) {
+            @if (password.hasError('required')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Password is Required</div>
+            } @else if (password.hasError('server')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Use capital letters and special characters</div>
+            }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input id="confirmPassword" type="password" formControlName="confirmpassword" placeholder="••••••••"
+              [ngClass]="{
+                'invalid': confirmPassword.touched && (confirmPassword.hasError('required') || confirmPassword.hasError('server')),
+                'valid': confirmPassword.touched && !(confirmPassword.hasError('required') || confirmPassword.hasError('server'))
+              }" />
+          </div>
+          @if (confirmPassword.touched) {
+            @if (confirmPassword.hasError('required')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Confirm Password is Required</div>
+            } @else if (confirmPassword.hasError('server')) {
+              <div class="error-message"><i class="fas fa-exclamation-circle"></i> Passwords must match</div>
+            }
+          }
+        </div>
+
+        <button type="submit" class="auth-btn" (click)="sumbit()">Register</button>
+
+        <div class="auth-footer d-flex justify-content-center align-items-center gap-2 flex-wrap">
+  <span class="text-dark">Already have an account?</span>
+  <a class="login-link" [routerLink]="['/account/login']">Login</a>
 </div>
 
+      </form>
+    </div>
+  </div>
 </div>

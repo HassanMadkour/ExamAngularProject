@@ -1,168 +1,158 @@
-.exam-card {
-  margin-bottom: 20px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  border: none;
-  border-radius: 12px;
-  overflow: hidden;
+:root {
+  --primary-color: #1D4645;
+  --secondary-color: #E8C5B0;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+}
+.exam-dashboard-container {
+  padding: 2rem 0;
+}
+.action-bar {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.btn-detail{
+  background-color: #E8C5B0;
+  border: #E8C5B0;
   transition: all 0.3s ease;
-  animation: fadeInUp 0.5s ease-out;
-  height: 100%;
+
+
+}
+.btn-add-exam {
+  background-color: #163635;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-add-exam:hover {
+  background-color: #163635;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(29, 70, 69, 0.2);
+}
+
+.search-box {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-box .form-control {
+  border-left: none;
+}
+
+.search-box .input-group-text {
+  border-right: none;
+}
+
+.no-exams-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 3rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.no-exams-icon {
+  font-size: 3rem;
+  color:#E8C5B0;
+}
+
+.no-exams-title {
+  color: #1D4645;
+  font-weight: 600;
+}
+
+.exam-card {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .exam-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
   padding: 1rem 1.5rem;
-  border-bottom: none;
-}
-.card-header2 {
-  background: linear-gradient(135deg, #4f415e 0%, #1c2638 100%);
   color: white;
-  padding: 1rem 1.5rem;
-  border-bottom: none;
+  background-color: #1D4645;
+
 }
 
-.exam-duration {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  display: inline-block;
-  animation: pulse 2s infinite;
+.degree-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.btn-start-exam {
-  background: linear-gradient(135deg, #80a1a1 0%, #223a3b 100%);
-  border: none;
-  border-radius: 30px;
-  padding: 8px 20px;
-  font-weight: 500;
-  transition: all 0.3s;
+.degree-info i {
+  font-size: 1.25rem;
 }
 
-
-.btn-start-exam2 {
-  background: linear-gradient(135deg, #223342 0%, #0b383a 100%);
-  border: none;
-  border-radius: 30px;
-  padding: 8px 20px;
-  font-weight: 500;
-  transition: all 0.3s;
+.max-degree i {
+  color: #28a745;
 }
 
-.btn-start-exam:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+.min-degree i {
+  color: #dc3545;
 }
 
+.time-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.time-info i {
+  font-size: 1.25rem;
+}
+
+.start-time i {
+  color: #1D4645;
+}
+
+.end-time i {
+  color: #dc3545;
+}
+
+/* Buttons */
 .btn-delete {
-  transition: all 0.3s;
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
 }
 
-.btn-delete:hover {
-  transform: rotate(5deg);
+.btn-edit {
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
 }
 
-.time-badge {
-  animation: bounce 2s infinite;
+.btn-questions, .btn-report {
+  background-color: #163635;
+  border: none;
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  color: white;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn-questions:hover, .btn-report:hover {
+  background-color: #163635;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .exam-card {
+    margin-bottom: 1.5rem;
   }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
+  .card-footer .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
   }
 }
-
-.progress {
-  height: 8px;
-  border-radius: 4px;
-  animation: progressGrow 1s ease-out;
-}
-
-@keyframes progressGrow {
-  from {
-    width: 0%;
-  }
-}
-
-
-.card-animation-delay-1 {
-  animation-delay: 0.1s;
-}
-.card-animation-delay-2 {
-  animation-delay: 0.2s;
-}
-.card-animation-delay-3 {
-  animation-delay: 0.3s;
-}
-
-
-
- .btn-add-exam {
-            background: linear-gradient(135deg, #5cb85c 0%, #2ecc71 100%);
-            border: none;
-            border-radius: 30px;
-            padding: 8px 20px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .btn-add-exam:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
-        }
-        
-         .search-box .form-control {
-            padding-left: 40px;
-            border-radius: 30px;
-            border: 1px solid #dee2e6;
-        }
-        
-        .search-box .bi-search {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-        }
-        .action-bar {
-            margin-bottom: 30px;
-        }
-
-
-
-
-
-     

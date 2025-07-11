@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AccountService } from '../Components/services/account-service';
 import { CompletedExam } from '../Models/completed-exam';
 import { INewQuizModel } from '../Models/inew-quiz-model';
+import { QuizQuestion } from '../Models/quiz-question';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class QuizService {
   private notLoggedInUrl: string = this.baseUrl + 'Student/';
   private loggedInUrl: string = this.baseUrl + 'Student/exams/';
   private passedExamsUrl = this.baseUrl + 'Student/';
+
 getCompletedExamsById(examId: string): Observable<CompletedExam> {
   const token = localStorage.getItem('token');
   const userId = this.AccountService.getUserIdFromToken();
@@ -49,8 +51,13 @@ const token = localStorage.getItem('token');
 
       return this.http.get<INewQuizModel[]>(`${this.loggedInUrl}${userId}`);
     } else {
-     
+
       return this.http.get<INewQuizModel[]>(`${this.notLoggedInUrl}AllUserExams`);
     }
   }
+ getQuizDetailsbyIdAndUserId(quizId: number): Observable<CompletedExam> {
+  const userId = this.AccountService.getUserIdFromToken();
+  return this.http.get<CompletedExam>(`${this.passedExamsUrl}${userId}/PassedExams/${quizId}`);
+}
+
 }

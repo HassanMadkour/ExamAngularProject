@@ -18,6 +18,9 @@ import { AllQuizzes } from './componantsRahma/all-quizzes/all-quizzes';
 import { Quizprocess } from './Pages/quiz-process/quizprocess';
 import { Profile } from './componantsRahma/profile/profile';
 import { CompletedExamsComponant } from './componantsRahma/completed-exams-componant/completed-exams-componant';
+import { Quizzes } from './componantsRahma/quizzes/quizzes';
+import { HowToPlayComponent } from './componantsRahma/how-to-play/how-to-play';
+import { CompletedExamDetails } from './componantsRahma/completed-exam-details/completed-exam-details';
 
 export const routes: Routes = [
     { path: "examform", component: ExamForm },
@@ -45,11 +48,17 @@ export const routes: Routes = [
   { path: 'completedExam/:examId', component: CompletedExamsComponant },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' }
-    , {
-        path: '**', 
+   ,
+    {path:"quizSection",component:Quizzes},
+    {path:"howToPlay",component:HowToPlayComponent},
+
+  { path: 'examDetails/:id', component: CompletedExamDetails }
+   , {
+        path: '**',
         redirectTo: 'notFound',
         pathMatch: 'full'
     }
+
 ];
 
 

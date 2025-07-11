@@ -13,18 +13,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ExamList implements OnInit {
 
-  exams! : IGetAllExam[];
+exams: IGetAllExam[] = [];
   datatoday:Date = new Date();
   searchKeyword!:string;
   constructor(private examService : ExamService,private cdr:ChangeDetectorRef){}
   ngOnInit(): void {
-  
+
     this.examService.gitAllExam().subscribe({
       next:(response)=>{
         this.exams = response;
         this.cdr.detectChanges();
         console.log(this.exams)
-       
+
       }  ,
       error:(error)=>{
         console.log(error);
@@ -37,7 +37,7 @@ export class ExamList implements OnInit {
       this.examService.gitAllExam().subscribe({
         next:(resp)=>{
           this.exams = resp;
-          this.cdr.detectChanges();  
+          this.cdr.detectChanges();
         },
         error:(err)=> {
             console.log(err)
@@ -48,7 +48,7 @@ export class ExamList implements OnInit {
         next:(resp)=>{
           console.log(resp)
           this.exams = resp;
-          this.cdr.detectChanges();  
+          this.cdr.detectChanges();
         },
         error:(err)=> {
             console.log(err)
@@ -73,7 +73,7 @@ export class ExamList implements OnInit {
       }
     })
     }
-   
+
   }
 
 }

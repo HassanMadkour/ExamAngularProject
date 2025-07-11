@@ -1,66 +1,12 @@
-
-.quiz-card {
-  background: white;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: none;
-  overflow: hidden;
-  min-height: 250px;
-  border-top: 4px solid hsl(var(--hue), 70%, 50%);
-}
-
-.quiz-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, hsla(var(--hue), 70%, 50%, 0.05), transparent);
-  z-index: 0;
-}
-
 .quiz-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(29, 70, 69, 0.15) !important;
 }
 
-.quiz-card h5 {
-  color: #1D4645;
-  position: relative;
-  z-index: 1;
+.quiz-card:hover .hover-effect {
+  opacity: 1;
 }
-
-.quiz-card p {
-  color: #5a6a72;
-  position: relative;
-  z-index: 1;
-}
-
-.icon-wrapper {
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.quiz-card:hover .icon-wrapper {
-  transform: rotate(10deg) scale(1.1);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.badge {
-  background-color: hsl(var(--hue), 70%, 90%);
-  color: hsl(var(--hue), 70%, 30%);
-  font-weight: 500;
-  padding: 5px 10px;
-  font-size: 0.75rem;
-}
-.quizzs{
-  background-color: white;
+.icon-wrapper img[src=""],
+.icon-wrapper img:not([src]) {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%231D4645'%3E%3Cpath d='M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z'/%3E%3C/svg%3E");
 }

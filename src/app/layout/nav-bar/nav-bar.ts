@@ -17,17 +17,24 @@ constructor(public accountService: AccountService, private router: Router , priv
     let token = localStorage.getItem('token');
      if (token) {
       const decoded = jwtDecode<IJWTClaims>(token);
-       this.cdr.detectChanges(); 
+       this.cdr.detectChanges();
        this.userName = decoded.userName ;
-      
+
      }
   }
+  goToSection(sectionId: string) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
   logout(): void {
     this.accountService.logout();
   }
 
   goToProfile(): void {
-    this.router.navigate(['profile']); 
+    this.router.navigate(['profile']);
   }
 
   goToLogin(): void {

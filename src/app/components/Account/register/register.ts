@@ -21,7 +21,7 @@ registerForm = new FormGroup({
   password : new FormControl('' , [Validators.required]) ,
   confirmpassword : new FormControl('' , [Validators.required]) ,
 
-})  
+})
 get userName(){return this.registerForm.controls["username"]} ;
 get email(){return this.registerForm.controls["email"]} ;
 get phoneNumber(){return this.registerForm.controls["phoneNumber"]} ;
@@ -39,10 +39,10 @@ this.submitted = true ;
   next: () => {
     alert("Please Check Your Email To Confirm Account Before Login");
     this.routerObj.navigate(['/account/login'])
-   
+
   },
   error: (errors) => {
-    
+
 
     if (typeof errors === 'object') {
       this.mapServerErrors(errors.errors);
@@ -51,22 +51,22 @@ this.submitted = true ;
         this.registerForm.get("password")?.setErrors({ server: "Please Make Password Contain Capital Letters And Special Characters"});
     }
   }
-}); 
+});
  }else  {
   this.registerForm.markAllAsTouched()
   return;
 
  }
-  
+
 }
 
 mapServerErrors(errors: { [key: string]: string[] }) {
   for (const key in errors) {
-  
+
     if (this.registerForm.get(key.toLowerCase())) {
       this.registerForm.get(key.toLowerCase())?.setErrors({ server: errors[key][0] });
     }
-    
+
   }
 }
 

@@ -1,5 +1,5 @@
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
-import { Component, OnInit, OnDestroy, ViewChild, inject, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, inject, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -8,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { QuizQuestion } from '../../Models/quiz-question';
 import { QuizService } from '../../Services/QuizServices/quiz.service';
-import { IAnswerQuestion } from '../../Models/ianswer-question';
 import { ISubmitionExam } from '../../Models/isubmition-exam';
 import { ActivatedRoute } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
@@ -22,7 +21,6 @@ import { IJWTClaims } from '../../Components/models/ijwtclaims';
   imports: [
     CommonModule,
     MatStepperModule,
-
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
@@ -32,9 +30,10 @@ import { IJWTClaims } from '../../Components/models/ijwtclaims';
 })
 export class Quizprocess implements OnInit, OnDestroy {
   constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute) { }
+
   @ViewChild('stepper') stepper!: MatStepper;
 
-  questions!: QuizQuestion[];
+  questions: QuizQuestion[] = [];
   answerForms: FormGroup[] = [];
   quizCompleted = false;
   score = 0;
@@ -45,48 +44,46 @@ export class Quizprocess implements OnInit, OnDestroy {
   timeOver = false;
   userId!: string;
   examId!: string;
+
   private fb = inject(FormBuilder);
   private quizService = inject(QuizService);
+
   getOptionLetter(index: number): string {
     return String.fromCharCode(65 + index);
   }
-  ngOnInit() {
+ngOnInit() {
+  this.examId = this.route.snapshot.paramMap.get('examId') || '';
+  const token = localStorage.getItem('token');
+  if (token) {
+    const decodedToken = jwtDecode<IJWTClaims>(token);
+    this.userId = decodedToken.id;
+  }
 
-    this.examId = this.route.snapshot.paramMap.get('examId') || '';
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = jwtDecode<IJWTClaims>(token);
-      this.userId = decodedToken.id;
-    }
-    this.quizService.getExamQuestions(this.examId).subscribe({
-      next: (data) => {
-
-        if (data && data.length > 0) {
-
-          this.questions = [];
-          data.forEach((element: any, index: number) => {
-            this.questions.push({ questionText: element.questionText, questionId: element.questionId, score: element.score, options: [], correctAnswer:'' })
-            this.questions[index].options.push(element.choice1)
-            this.questions[index].options.push(element.choice2)
-            this.questions[index].options.push(element.choice3)
-            this.questions[index].options.push(element.choice4)
-          });
+  this.quizService.getExamQuestions(this.examId).subscribe({
+    next: (data) => {
+      if (data && data.length > 0) {
+        setTimeout(() => {
+          this.questions = data.map((element: any) => ({
+            questionText: element.questionText,
+            questionId: element.questionId,
+            score: element.score,
+            options: [element.choice1, element.choice2, element.choice3, element.choice4],
+            correctAnswer: ''
+          }));
 
           this.buildForm();
           this.startTimer();
           this.cdr.detectChanges();
-
-
-        }
-
-      },
-      error: (err) => {
-        console.log(err)
+        });
       }
-    });
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+}
 
 
-  }
   ngOnDestroy() {
     clearInterval(this.timerInterval);
   }
@@ -99,51 +96,50 @@ export class Quizprocess implements OnInit, OnDestroy {
     );
   }
 
-  submitQuiz() {
-    this.score = 0;
-    this.userAnswers = [];
-    this.unansweredIndices = [];
-    let submitionExam: ISubmitionExam = { userId: +this.userId, examId: +this.examId, answers: [] };
-    this.questions.forEach((q, i) => {
-      const selected = this.answerForms[i].value.answer;
-      submitionExam.answers.push({ questionId: q.questionId, selectedAnswer: selected })
+submitQuiz() {
+  this.score = 0;
+  this.userAnswers = [];
+  this.unansweredIndices = [];
 
-    });
-    
-      
+  let submitionExam: ISubmitionExam = {
+    userId: +this.userId,
+    examId: +this.examId,
+    answers: []
+  };
+
+  this.questions.forEach((q, i) => {
+    const selected = this.answerForms[i].value.answer;
+    submitionExam.answers.push({ questionId: q.questionId, selectedAnswer: selected });
+
+    // ✅ Disable the control here
+    this.answerForms[i].get('answer')?.disable();
+  });
+
+  this.quizService.submitExam(submitionExam).subscribe({
+    next: (data) => {
+      this.questions.forEach((ques, i) => {
+        ques.correctAnswer = data.details[i].correctAnswer;
+      });
+      this.score = data.totalScore;
+    },
+    error: (err) => {
+      console.log("error in submition exam ", err);
+    }
+  });
+
+  this.quizCompleted = true;
+  clearInterval(this.timerInterval);
+
+  setTimeout(() => {
+    if (this.stepper) {
+      this.stepper.selectedIndex = this.questions.length;
+    }
+      this.cdr.detectChanges();   
+
+  });
+}
 
 
-    this.quizService.submitExam(submitionExam).subscribe({
-      next: (data) => {
-        this.questions.forEach((ques , i ) => {
-          ques.correctAnswer = data.details[i].correctAnswer;
-        })
-        this.score = data.totalScore;
-      },
-      error: (err) => {
-        console.log("error in submition exam ", err)
-      }
-
-    })
-    this.quizCompleted = true;
-    clearInterval(this.timerInterval);
-    setTimeout(() => {
-      if (this.stepper) {
-        this.stepper.selectedIndex = this.questions.length;
-      }
-      return;
-    });
-  }
-
-  resetQuiz() {
-    this.quizCompleted = false;
-    this.timeLeft = 60;
-    this.timeOver = false;
-    this.userAnswers = [];
-    this.unansweredIndices = [];
-    this.buildForm();
-    this.startTimer();
-  }
 
   startTimer() {
     this.timerInterval = setInterval(() => {

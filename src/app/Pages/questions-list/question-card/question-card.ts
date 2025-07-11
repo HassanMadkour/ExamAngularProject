@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class QuestionCard implements OnInit {
   options : IOptionModel[] = [];
- @Input({required : true}) questionModel! : IQuestionModel ; 
+ @Input({required : true}) questionModel! : IQuestionModel ;
  @Input({required : true}) index! : number ;
  @Output () deleteQuestion = new EventEmitter<IQuestionModel>();
  constructor (private questionService : QuestionService){
@@ -33,18 +33,18 @@ export class QuestionCard implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'Cancel',
-     
+
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.removeQuestion(); 
+        this.removeQuestion();
       }
     });
   }
-  
- 
+
+
   removeQuestion(){
-  
+
     this.questionService.deleteQuestion(this.questionModel.id).subscribe(
       {
         next: (response) => {

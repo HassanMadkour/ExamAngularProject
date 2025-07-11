@@ -14,7 +14,7 @@ import { IJWTClaims } from '../../models/ijwtclaims';
   styleUrl: './login.css'
 })
 export class Login   {
-  
+
 role:string = '';
   loginModel!:ILoginUser
 constructor(private accountService:AccountService , private routerObj: Router){}
@@ -31,7 +31,7 @@ get Password() {return this.loginForm.controls['Password']}
 isServerErrors:boolean = false ;
 errorMessage:string = ''
 
-sumbit() {
+submit() {
 
 
    if(this.loginForm.status == "VALID") {
@@ -40,9 +40,9 @@ sumbit() {
    this.accountService.login(this.loginModel).subscribe({
       next: (res) => {
 
-        localStorage.setItem('token', res.token); 
+        localStorage.setItem('token', res.token);
          const token = res.token
-    
+
      if (token) {
       const decoded = jwtDecode<IJWTClaims>(token);
        this.role = decoded.role;
@@ -50,7 +50,7 @@ sumbit() {
      if(this.role == 'admin') {
         this.routerObj.navigate(['/examlist']);
       }else if(this.role == 'student') {
-        this.routerObj.navigate(['/home']); 
+        this.routerObj.navigate(['/home']);
       }
       },
       error: (err) => {

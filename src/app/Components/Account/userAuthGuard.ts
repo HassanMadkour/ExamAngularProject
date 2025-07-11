@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { IJWTClaims } from '../models/ijwtclaims';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class UserAuthGuard implements CanActivate {
 
   constructor(private router: Router) {}
 
@@ -15,12 +15,12 @@ export class AuthGuard implements CanActivate {
       try {
         const decoded = jwtDecode<IJWTClaims>(token);
 
-        if (decoded.role === 'admin') {
+        if (decoded.role === 'student') {
+          return true;
+        } else {
           this.router.navigate(['/not-found']);
           return false;
         }
-
-        return true;
       } catch (error) {
         this.router.navigate(['/account/login']);
         return false;
