@@ -40,4 +40,9 @@ constructor(public accountService: AccountService, private router: Router , priv
   goToLogin(): void {
     this.router.navigate(['/account/login']);
   }
+
+ changePassword(): void {
+    this.router.navigate(['/account/changepassword']);
+
+  }
 }
